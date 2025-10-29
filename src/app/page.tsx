@@ -12,17 +12,7 @@ export default function Home() {
         // - max-w-[1440px] mx-auto: Replicates the 1440px width and centers it.
         // - py-4 px-18: Vertical (16px) and Horizontal (72px) padding.
         // - gap-24: Vertical spacing (96px) between main sections.
-        className="
-          flex 
-          flex-col 
-          items-center 
-          max-w-[1440px] 
-          mx-auto 
-          py-4 
-          px-18 
-          gap-24 
-          w-full
-        "
+        className="flex flex-col items-center max-w-[1440px] mx-auto py-4 px-18 gap-24 w-full"
       >
         {/* The Navbar component */}
         <Navbar />

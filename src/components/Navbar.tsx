@@ -18,32 +18,18 @@ const LOTTIE_URL = "https://fonts.gstatic.com/s/e/notoemoji/latest/1f440/lottie.
 
 //The main navbar component
 export default function Navbar() {
-    const [safePath, setSafePath] = useState(''); // Initialize with empty string for client-safe path
+    const [isMounted, setIsMounted] = useState(false); // 1. Initialized to false
     const currentPath = usePathname(); // Get the pathname on the client
 
-    // Wait until the component is mounted on the client to set the path safely
+    // Use useEffect to flag when the component has mounted on the client
     useEffect(() => {
-        //This runs only on the client, after initial render/hydration
-        setSafePath(currentPath);
-    }, [currentPath]); // Run once when currentPath is resolved
-
+        // 2. This runs only on the client, after initial render/hydration
+        setIsMounted(true);
+    }, []);
     return (
         <nav
             //The container for the entire navbar, centred on the page
-            className="
-            sticky top-6 z-10
-            flex
-            items-center
-            justify-between
-            w-[100%]
-            max-w-[1056px]
-            p-4 sm:px-9 sm:py-4
-            bg-background-secondary
-            rounded-xl
-            shadow-2xl
-            shadow-black/10
-            "
-        >
+            className="sticky top-6 z-10 flex items-center justify-between w-[100%] max-w-[1056px] p-4 sm:px-9 sm:py-4 bg-background-secondary  rounded-xl shadow-2xl shadow-black/10">
             {/* Logo*/}
             <div className="relative flex-shrink-0">
                 <Image
@@ -56,35 +42,16 @@ export default function Navbar() {
             </div>
 
             {/* Navigation Links */}
-            <div className="
-                flex
-                items-center
-                gap-12
-                font-medium
-                text-xl
-                "
-            >
+            <div className="flex items-center gap-12 font-medium text-xl">
                 {navItems.map((item) =>{
-                    // Use the client-safe 'safePath' variable for the comparison
-                    // This ensures that the isActive state is always false during SSR
-                    // and only becomes true once useEffect runs on the client.
-                    const isActive = safePath && (item.href === safePath);
+                    // 3. FIX: ONLY perform the isActive check AFTER mounting on the client
+                    const isActive = isMounted && (item.href === currentPath);
 
                     return (
                         <Link
                             key={item.name}
                             href={item.href}
-                            className={`
-                                leading-normal
-                                transition-all
-                                ${isActive ? 'text-accent ': 'text-dominant'}
-                                
-                                hover:border-b-3
-                                hover:border-accent
-                                hover:pb-3
-                                hover:text-accent
-                                hover:font-semibold
-                            `}
+                            className={`leading-normal transition-all ${isActive ? 'text-accent ': 'text-dominant'} hover:border-b-3 hover:border-accent hover:pb-3 hover:text-accent hover:font-semibold`}
                         >
                             {item.name}
                         </Link>
