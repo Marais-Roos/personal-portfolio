@@ -5,6 +5,7 @@ import Image from "next/image";
 import Button from "./Button";
 import LottieIcon from "./LottieIcon";
 import { usePathname } from "next/navigation";
+import {useState, useEffect, use} from "react";
 
 //Define the navigation items
 const navItems = [
@@ -17,7 +18,14 @@ const LOTTIE_URL = "https://fonts.gstatic.com/s/e/notoemoji/latest/1f440/lottie.
 
 //The main navbar component
 export default function Navbar() {
-    const currentPath = usePathname();
+    const [safePath, setSafePath] = useState(''); // Initialize with empty string for client-safe path
+    const currentPath = usePathname(); // Get the pathname on the client
+
+    // Wait until the component is mounted on the client to set the path safely
+    useEffect(() => {
+        //This runs only on the client, after initial render/hydration
+        setSafePath(currentPath);
+    }, [currentPath]); // Run once when currentPath is resolved
 
     return (
         <nav
@@ -57,7 +65,10 @@ export default function Navbar() {
                 "
             >
                 {navItems.map((item) =>{
-                    const isActive = item.href === currentPath;
+                    // Use the client-safe 'safePath' variable for the comparison
+                    // This ensures that the isActive state is always false during SSR
+                    // and only becomes true once useEffect runs on the client.
+                    const isActive = safePath && (item.href === safePath);
 
                     return (
                         <Link
