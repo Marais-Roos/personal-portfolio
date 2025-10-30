@@ -1,9 +1,10 @@
 import Navbar from "@/components/Navbar"; 
+import RotatingGreeting from "@/components/RotatingGreeting";
 import Image from "next/image";
 import Button from "@/components/Button";
 import LottieIcon from "@/components/LottieIcon";
 import LinkArrow from "@/components/LinkArrow";
-import { Star } from "lucide-react";
+import CTASection from "@/components/CTASection";
 
 export default function Home() {
 
@@ -33,43 +34,16 @@ export default function Home() {
               </div>
               {/*Content of top part of header*/}
               <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative">
-                <h1 className="text-7xl font-black">Dumela le kae!?</h1>
+                <RotatingGreeting/>
                 <p className="text-2xl">I'm Marais. I once studied serious things like informatics and engineering... now I make pretty websites that actually work.</p>
-                <div className="absolute top-[-72] right-0">
+                <div className="absolute top-[-20] right-[-16]">
                   <LottieIcon size={84} src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/lottie.json"/>
                 </div>
               </div>
             </div>
             {/*Hero Section Middle*/}
-            <div className="flex items-center w-full bg-background-primary max-w-full p-9 rounded-3xl gap-6 shadow-xl shadow-black/10">
-              {/*Left*/}
-              <div className="flex flex-col flex-1 gap-5">
-                <h2 className="text-5xl font-bold">Check out my latest portfolio.</h2>
-                <div className="bg-background-secondary flex flex-col gap-4 p-4 rounded-2xl">
-                  <p className="text-base">"Marais fixed something on my screen, and suddenly everything started working smoothly. I guess that's what the kids call tech-savvy."</p>
-                  <div className="flex items-center gap-4">
-                    <div className="aspect-square w-10 h-10 rounded-full bg-[url(/Avatar.png)] bg-cover bg-center">
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="flex gap-0">
-                        {Array(5).fill(0).map((_, index) => (
-                          <Star key={index} size={16} className="text-transparent fill-amber-500"/>
-                        ))}
-                      </div>
-                      <p className="font-semibold text-base">The Friendly Old Lady Next Door</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*Right*/}
-              <div className="flex flex-col flex-1 gap-5">
-                <p className="text-xl">Get an in-depth look at the work I do, and how I turn creative ideas into concrete digital assets.</p>
-                <div className="flex gap-6">
-                  <Button href="/contact" variant="small">I want the PDF</Button>
-                  <Button href="/contact" variant="outline">Take me there</Button>
-                </div>
-              </div>
-            </div>
+            <CTASection/>
+            
             {/*Hero Section Bottom*/}
             <div className="flex flex-col w-full max-w-full gap-4 items-center">
               <h2 className="text-l font-medium">Some of the tools in my shed:</h2>
@@ -103,35 +77,7 @@ export default function Home() {
 
           {/*Call To Action Section*/}
           <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
-            <div className="flex items-center w-full bg-background-primary max-w-full p-9 rounded-3xl gap-6 shadow-xl shadow-black/10">
-              {/*Left*/}
-              <div className="flex flex-col flex-1 gap-5">
-                <h2 className="text-5xl font-bold">Check out my latest portfolio.</h2>
-                <div className="bg-background-secondary flex flex-col gap-4 p-4 rounded-2xl">
-                  <p className="text-base">"Marais fixed something on my screen, and suddenly everything started working smoothly. I guess that's what the kids call tech-savvy."</p>
-                  <div className="flex items-center gap-4">
-                    <div className="aspect-square w-10 h-10 rounded-full bg-[url(/Avatar.png)] bg-cover bg-center">
-                    </div>
-                    <div className="flex flex-col">
-                      <div className="flex gap-0">
-                        {Array(5).fill(0).map((_, index) => (
-                          <Star key={index} size={16} className="text-transparent fill-amber-500"/>
-                        ))}
-                      </div>
-                      <p className="font-semibold text-base">The Friendly Old Lady Next Door</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              {/*Right*/}
-              <div className="flex flex-col flex-1 gap-5">
-                <p className="text-xl">Get an in-depth look at the work I do, and how I turn creative ideas into concrete digital assets.</p>
-                <div className="flex gap-6">
-                  <Button href="/contact" variant="small">I want the PDF</Button>
-                  <Button href="/contact" variant="outline">Take me there</Button>
-                </div>
-              </div>
-            </div>
+            <CTASection/>
           </div>
         </main>
       </div>
