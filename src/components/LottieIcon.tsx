@@ -39,7 +39,7 @@ export default function LottieIcon({ src, size = 24 }: LottieIconProps) {
         <div
             ref={ref}
             style={{ width: size, height: size }}
-            className="inline-block flex-shrink-0" // Prevents the icon from being compressed
+            className="inline-block shrink-0" // Prevents the icon from being compressed
         />
     );
 }
