@@ -62,6 +62,7 @@ export default function RotatingGreeting() {
       className="text-7xl font-black text-dominant relative overflow-hidden h-24 w-full flex items-start justify-start
       "
     >
+       
       {/* AnimatePresence manages the transition between elements with the same key.
           mode="wait" ensures the exiting element finishes before the new element enters. */}
       <AnimatePresence initial={false} mode="wait">

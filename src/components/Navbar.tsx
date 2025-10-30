@@ -29,9 +29,9 @@ export default function Navbar() {
     return (
         <nav
             //The container for the entire navbar, centred on the page
-            className="sticky top-6 z-10 flex items-center justify-between w-[100%] max-w-[1056px] p-4 sm:px-9 sm:py-4 bg-background-secondary  rounded-xl shadow-2xl shadow-black/10">
+            className="sticky top-6 z-10 flex items-center justify-between w-full max-w-[1056px] p-4 sm:px-9 sm:py-4 bg-background-secondary  rounded-xl shadow-2xl shadow-black/10">
             {/* Logo*/}
-            <div className="relative flex-shrink-0">
+            <div className="relative shrink-0">
                 <Image
                     src="/Logo-blue.svg"
                     alt="Marais Roos Logo"
