@@ -1,20 +1,19 @@
-// This component must be a client component for Framer Motion
-'use client';
+'use client'; // This component must be a client component for Framer Motion
 
 import React, { useState, useEffect } from 'react';
-// NEW IMPORTS
 import { motion, AnimatePresence } from 'framer-motion'; 
 
-// Your list of greetings
-const GREETINGS = [
+// --- Configuration ---
+// The list of words for the rotating part (Part 2)
+const ROTATING_WORDS = [
   "Hey there!", 
-  "Dag sê!",    
-  "Dumela!",  
+  "Dag sê!",    
+  "Dumela!",  
 ];
 
 const ROTATION_INTERVAL = 3000; 
 
-// Framer Motion animation definitions (Variants)
+// Framer Motion animation definitions (Variants) - Must be accessible to the motion component
 const animationVariants = {
   // State 1: When the new text is ready to enter (off-screen below)
   enter: { 
@@ -41,43 +40,54 @@ const animationVariants = {
     } 
   }
 };
+// --------------------
 
-
-export default function RotatingGreeting() {
-  // State is simplified back to just the index
+export default function RotatingHeading() {
+  // State is for the index of the word currently being displayed
   const [index, setIndex] = useState(0); 
 
   // Core Logic: Cycle the index every ROTATION_INTERVAL
   useEffect(() => {
     const timer = setInterval(() => {
-      setIndex((prevIndex) => (prevIndex + 1) % GREETINGS.length);
+      // Use modulo operator to loop back to 0
+      setIndex((prevIndex) => (prevIndex + 1) % ROTATING_WORDS.length);
     }, ROTATION_INTERVAL);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearInterval(timer); // Cleanup function
+  }, []); // Empty dependency array means this runs once on mount
 
   return (
-    // Outer container acts as the fixed window (h-[4.5rem] from previous steps)
+    // The H1 container holds all three parts. 
+    // It must be a 'flex' container (or similar) to arrange the spans horizontally.
+    // The rotating part's parent container (span below) needs 'overflow-hidden' and a fixed height/width.
     <h1
-      className="text-7xl font-black text-dominant relative overflow-hidden h-24 w-full flex items-start justify-start"
+      className="text-7xl font-black text-dominant flex items-left justify-left h-24"
     >
-      {/* AnimatePresence manages the transition between elements with the same key.
-          mode="wait" ensures the exiting element finishes before the new element enters. */}
-      <AnimatePresence initial={false} mode="wait">
-        <motion.span
-          // Key change triggers the exit/enter sequence
-          key={GREETINGS[index]} 
-          
-          className="absolute top-0 left-0 w-full text-left" 
-          
-          variants={animationVariants}
-          initial="enter" // Start below
-          animate="center" // Scroll to center
-          exit="exit"    // Scroll up and out
-        >
-          {GREETINGS[index]}
-        </motion.span>
-      </AnimatePresence>
+      {/* Part 2: Rotating Span Container */}
+      <span
+        // Key is not needed here, only for the inner motion.span
+        className="relative overflow-hidden h-24" // Fixed height for the window
+        style={{ width: '100%' }} // Set a max-width to prevent shifting when words change length
+      >
+        <AnimatePresence initial={false} mode="wait">
+          {/* Inner Motion Span: The actual rotating content */}
+          <motion.span
+            // **Crucial Fix:** The key must change to trigger the exit/enter sequence
+            key={ROTATING_WORDS[index]} 
+            
+            // Positioning for the animation: must be absolute to stack
+            className="absolute top-0 left-0 w-full text-left" 
+            
+            // Corrected Variants usage: `animationVariants` is now in scope.
+            variants={animationVariants} 
+            initial="enter" // Start below
+            animate="center" // Scroll to center
+            exit="exit"     // Scroll up and out
+          >
+            {ROTATING_WORDS[index]}
+          </motion.span>
+        </AnimatePresence>
+      </span>
     </h1>
   );
 }
