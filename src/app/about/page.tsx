@@ -31,30 +31,30 @@ export default function About() {
                             <h2 className="font-bold text-dominant text-5xl">Quick Facts About Me</h2>
                             <div className="flex gap-8">
                                 <div className=" flex flex-col gap-6 flex-1">
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={32} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I started in engineering but realized creativity was calling louder than formulas.</p>
                                     </div>
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={32} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I'm currently studying BSc Informatics at UNISA because I still love logic and tech puzzles.</p>
                                     </div>
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={32} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I like clean, functional design — nothing too fancy, just stuff that works and looks good.</p>
                                     </div>
                                 </div>
                                 <div className=" flex flex-col gap-6 flex-1">
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={32} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I spent nearly a year as a financial advisor — it wasn't quite my thing, but I made great friends and learned a lot about sticking around for the long term.</p>
                                     </div>
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={32} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I've lost count of how many times I've rewatched The Office & Family Guy — it's basically comfort food.</p>
                                     </div>
-                                    <div className="flex align-top gap-4 text-dominant text-2xl">
-                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-accent"/>
+                                    <div className="flex align-top gap-4 text-dominant text-xl">
+                                        <CircleCheck size={30} className="shrink-0 text-background-secondary fill-dominant"/>
                                         <p>I'm pretty shy for an extrovert — maybe just a bit short on confidence. If you have any tips... please reach out! 😅</p>
                                     </div>
                                 </div>
@@ -187,6 +187,40 @@ export default function About() {
                                 </p>
                                 <div className="flex-1 flex relative aspect-square shrink-0 w-32 h-32">
                                     <Image src="/timeline images/7.png" alt="" fill className=" w-full object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {/*Tools section*/}
+                    <div className="w-full flex flex-col gap-8 items-center">
+                        <div className="flex flex-col gap-5 items-center w-full">
+                            <h2 className="text-5xl font-bold text-dominant text-center">The tools in my shed</h2>
+                            <p className="text-dominant text-xl text-center">I utilize several tools… here are my favourites.</p>
+                        </div>
+                        <div className="grid grid-cols-3 grid-rows-2 gap-6 items-center justify-center align-center w-full">
+                            <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
+                                <div className="w-40 aspect-video relative shrink-0">
+                                    <Image src="/tools/Figma-1.svg" alt="" fill className=" w-full object-contain"/>
+                                </div>
+                            </div>
+                            <div className="border-2 rounded-2xl border-background-secondary p-6  items-center flex flex-col">
+                                <div className="w-40 aspect-video relative shrink-0">
+                                    <Image src="/tools/Webflow-1.svg" alt="" fill className=" w-full object-contain"/>
+                                </div>
+                            </div>
+                            <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
+                                <div className="w-40 aspect-video relative shrink-0">
+                                    <Image src="/tools/Framer-1.svg" alt="" fill className=" w-full object-contain"/>
+                                </div>
+                            </div>
+                            <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
+                                <div className="w-40 aspect-video relative shrink-0">
+                                    <Image src="/tools/Zapier-1.svg" alt="" fill className=" w-full object-contain"/>
+                                </div>
+                            </div>
+                            <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
+                                <div className="w-40 aspect-video relative shrink-0">
+                                    <Image src="/tools/MailerLite-1.svg" alt="" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                         </div>
