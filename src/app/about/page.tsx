@@ -200,27 +200,27 @@ export default function About() {
                         <div className="grid grid-cols-3 grid-rows-2 gap-6 items-center justify-center align-center w-full">
                             <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
                                 <div className="w-40 aspect-video relative shrink-0">
-                                    <Image src="/tools/Figma-1.svg" alt="" fill className=" w-full object-contain"/>
+                                    <Image src="/tools/Figma-1.svg" alt="Figma Logo" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                             <div className="border-2 rounded-2xl border-background-secondary p-6  items-center flex flex-col">
                                 <div className="w-40 aspect-video relative shrink-0">
-                                    <Image src="/tools/Webflow-1.svg" alt="" fill className=" w-full object-contain"/>
+                                    <Image src="/tools/Webflow-1.svg" alt="Webflow Logo" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                             <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
                                 <div className="w-40 aspect-video relative shrink-0">
-                                    <Image src="/tools/Framer-1.svg" alt="" fill className=" w-full object-contain"/>
+                                    <Image src="/tools/Framer-1.svg" alt="Framer Logo" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                             <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
                                 <div className="w-40 aspect-video relative shrink-0">
-                                    <Image src="/tools/Zapier-1.svg" alt="" fill className=" w-full object-contain"/>
+                                    <Image src="/tools/Zapier-1.svg" alt="Zapier Logo" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                             <div className="border-2 rounded-2xl border-background-secondary p-6 items-center flex flex-col">
                                 <div className="w-40 aspect-video relative shrink-0">
-                                    <Image src="/tools/MailerLite-1.svg" alt="" fill className=" w-full object-contain"/>
+                                    <Image src="/tools/MailerLite-1.svg" alt="Mailerlite Logo" fill className=" w-full object-contain"/>
                                 </div>
                             </div>
                         </div>

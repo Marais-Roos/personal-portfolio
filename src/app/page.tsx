@@ -30,7 +30,7 @@ export default function Home() {
             <div className="flex items-center w-full gap-6 max-w-full">
               {/*Image container*/}
               <div className="max-w-full flex-1 relative h-full aspect-square">
-                <Image src="/Hero Image.png" alt="Marais Roos" fill className="object-cover"/>
+                <Image src="/Intro Image.png" alt="Marais Roos" fill className="object-cover"/>
               </div>
               {/*Content of top part of header*/}
               <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative">

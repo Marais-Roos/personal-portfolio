@@ -12,7 +12,7 @@ const GREETINGS = [
   "Dumela!",  
 ];
 
-const ROTATION_INTERVAL = 3000; 
+const ROTATION_INTERVAL = 1500; 
 
 // Framer Motion animation definitions (Variants)
 const animationVariants: Variants = {
