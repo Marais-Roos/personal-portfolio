@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; //Import Poppins font from Google fonts
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 //Define new Poppins font with specific weights and subsets
 const poppins = Poppins({
