@@ -1,7 +1,10 @@
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
+
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; //Import Poppins font from Google fonts
 import "./globals.css";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+
 
 //Define new Poppins font with specific weights and subsets
 const poppins = Poppins({
@@ -28,6 +31,8 @@ export default function RootLayout({
       <body className={`${poppins.variable} antialiased`}
       >
         {children}
+        <SpeedInsights/>
+        <Analytics/>
       </body>
     </html>
   );
