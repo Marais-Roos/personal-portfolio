@@ -6,14 +6,14 @@ import type { NextConfig } from "next";
 // We must ensure NEXT_PUBLIC_SUPABASE_URL is defined in .env.local.
 
 // Safely get the hostname from the full URL
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseUrl = process.env.SUPABASE_URL;
 
 let supabaseHostname = '';
 if (supabaseUrl) {
     try {
         supabaseHostname = new URL(supabaseUrl).hostname;
     } catch (e) {
-        console.error("Invalid NEXT_PUBLIC_SUPABASE_URL in .env.local. Check format.");
+        console.error("Invalid UPABASE_URL in .env.local. Check format.");
         // Fallback or exit if necessary
     }
 }
