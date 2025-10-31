@@ -1,10 +1,13 @@
 import Navbar from "@/components/Navbar"; 
 import RotatingGreeting from "@/components/RotatingGreeting";
 import Image from "next/image";
-import Button from "@/components/Button";
 import LottieIcon from "@/components/LottieIcon";
 import LinkArrow from "@/components/LinkArrow";
 import CTASection from "@/components/CTASection";
+import ServiceCard from "@/components/ServiceCard";
+import { portfolioData } from "@/data/portfolio-data";
+
+const services=portfolioData.services;
 
 export default function Home() {
 
@@ -58,7 +61,20 @@ export default function Home() {
           </div>
 
           {/*Services Section*/}
-
+          <div className="grid w-full max-w-full gap-6 grid-cols-2 grid-rows-6">
+            <div className="flex flex-col justify-start items-start pt-9 pl-9 h-min row-span-1">
+              <h2 className="text-5xl font-bold">What I bring to the table</h2>
+            </div>
+            {services.map ((service, index) => (
+                <div className="row-span-2">
+                  <ServiceCard 
+                  key={service.slug}
+                  service={service}
+                />
+                </div>
+                
+              ))}
+          </div>
           {/*About Section*/}
 
           <div className="p-9 bg-background-secondary w-full rounded-2xl gap-6 shadow-2xl shadow-black/10 flex items-center max-w-full">

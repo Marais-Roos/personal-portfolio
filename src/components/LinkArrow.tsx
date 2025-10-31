@@ -16,7 +16,7 @@ export default function LinkArrow({ href, children, className = "" }: LinkArrowP
             className={`
                 group
                 flex
-                items-center
+                items-left
                 align-center
                 text-dominant
                 font-semibold
