@@ -50,14 +50,14 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
                 {/* Right: Controls */}
                 <div className="flex gap-4 shrink-0 h-fit">
                     <div 
-                        className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-background-primary hover:bg-dominant transition-colors" 
+                        className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-background-primary hover:bg-dominant transition-colors cursor-pointer" 
                         onClick={() =>scroll('left')}
                         aria-label={`Scroll left through ${title} projects`}
                     >
                         <ArrowLeft size={48} />
                     </div>
                     <div 
-                        className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-background-primary hover:bg-dominant transition-colors" 
+                        className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-background-primary hover:bg-dominant transition-colors cursor-pointer" 
                         onClick={() =>scroll('right')}
                         aria-label={`Scroll right through ${title} projects`}
                     >
