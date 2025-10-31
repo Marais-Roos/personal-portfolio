@@ -63,7 +63,7 @@ export default function Home() {
           {/*Services Section*/}
           <div className="grid w-full max-w-full gap-6 grid-cols-2 grid-rows-6">
             <div className="flex flex-col justify-start items-start pt-9 pl-9 h-min row-span-1">
-              <h2 className="text-5xl font-bold">What I bring to the table</h2>
+              <h2 className="text-6xl font-bold">What I bring to the table</h2>
             </div>
             {services.map ((service, index) => (
                 <div className="row-span-2">
