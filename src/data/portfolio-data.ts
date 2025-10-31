@@ -41,16 +41,7 @@ export const services: Service[] = [
         iconActive: "https://framerusercontent.com/images/qRpcNRe0p1vGHbeYEyMd4enrijQ.svg",
         sectionLink: "",
     },
-    {
-        slug: "digital-marketing",
-        title: "Digital Marketing",
-        index: 5,
-        shortDescription: "I get your brand in front of the right people without selling my soul (or yours).",
-        longDescription: "I make sure your marketing materials don't sound like a robot wrote them. Clear, simple, and with just enough charm to catch attention without feeling like a sales pitch.",
-        iconInactive: "https://framerusercontent.com/images/4b3nLfbrPtYQUUmnlbYyZZXxQlg.svg",
-        iconActive: "https://framerusercontent.com/images/O317vZpI5KRo9qsIQb9V3Kh4FPM.svg",
-        sectionLink: "",
-    },
+    
 ]
 
 export const projects: Project[] = [
@@ -63,15 +54,15 @@ export const projects: Project[] = [
         mainImage: "https://framerusercontent.com/images/4lvO1600WcDnMqu4trq1xeVZqo.png",
         altText: "",
         galleryImages: [
-        {
-            url: "https://framerusercontent.com/images/project-msmi-detail-1.png",
-            alt: "Close-up of the movie poster typography and tagline.",
-        },
-        {
-            url: "https://framerusercontent.com/images/project-msmi-mockup.jpg",
-            alt: "Mockup of the movie poster displayed on a billboard.",
-        },
-    ],
+            {
+                url: "https://framerusercontent.com/images/project-msmi-detail-1.png",
+                alt: "Close-up of the movie poster typography and tagline.",
+            },
+            {
+                url: "https://framerusercontent.com/images/project-msmi-mockup.jpg",
+                alt: "Mockup of the movie poster displayed on a billboard.",
+            },
+        ],
     },
     {
         slug: "somehow-i-manage-michael-scott",
@@ -82,6 +73,25 @@ export const projects: Project[] = [
         mainImage: "https://framerusercontent.com/images/awfzMcZ6HeaK7s2uMtTgLOKIy5Q.png",
         altText: "",
     },
+    {
+        slug: "professional-printing-solutions-website",
+        title: "Professional Printing Solutions Website",
+        description: "A modern, SEO-optimized website for Triangle Print Spot, a family-owned printing shop in Vanderbijlpark. Built to showcase services, attract customers, and streamline inquiries with a user-friendly design and clear calls to action.",
+        serviceSlugs: ["web-design-development"],
+        date: "2025-08-23",
+        mainImage: "https://cdn.prod.website-files.com/67c1ce10e325be1f99898cdc/67dc7ff91f957d7cfd415185_Thumbnail.png",
+        altText: "",
+        galleryImages: [
+            {
+                url: "https://framerusercontent.com/images/project-msmi-detail-1.png",
+                alt: "Close-up of the movie poster typography and tagline.",
+            },
+            {
+                url: "https://framerusercontent.com/images/project-msmi-mockup.jpg",
+                alt: "Mockup of the movie poster displayed on a billboard.",
+            },
+        ],
+    }
 ];
 
 export const portfolioData = {

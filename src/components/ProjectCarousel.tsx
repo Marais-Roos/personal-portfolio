@@ -67,7 +67,7 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
             </div>
             {/* Carousel Content Container (Horizontal Scroll) */}
             <div ref={scrollRef}
-                className="flex gap-6 overflow-x-scroll overflow-y-hidden px-9 py-4 snap-x snap-mandatory
+                className="flex gap-6 overflow-x-auto px-9 py-4 snap-x snap-mandatory
                             [&::-webkit-scrollbar]:h-0
                             [-ms-overflow-style]:none
                             [scrollbar-width]:none"   

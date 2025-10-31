@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         // Optional: you can restrict the pathnames if needed, but not necessary here
         // pathname: '/images/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.prod.website-files.com',
+        // Optional: you can restrict the pathnames if needed, but not necessary here
+        // pathname: '/images/**',
+      },
     ],
   },
 };

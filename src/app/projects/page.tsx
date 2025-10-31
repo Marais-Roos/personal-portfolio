@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Button from "@/components/Button";
@@ -92,7 +93,9 @@ export default function Projects() {
                     {/*Call To Action Section*/}
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
                         <CTASection/>
-                    </div>            
+                    </div>    
+
+                    <Footer />        
                 </main>
             </div>
         </div>

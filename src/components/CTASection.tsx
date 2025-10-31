@@ -13,7 +13,7 @@ export default function CTASection() {
           <p className="text-base">"Marais fixed something on my screen, and suddenly everything started working smoothly. I guess that's what the kids call tech-savvy."</p>
           <div className="flex items-center gap-4">
             <div className="aspect-square w-10 h-10 rounded-full relative overflow-hidden">
-              <Image src="/Avatar.jpg" alt="" fill className="object-cover"/>
+              <Image src="/Avatar.png" alt="" fill className="object-contain"/>
             </div>
             <div className="flex flex-col">
               <div className="flex gap-0">

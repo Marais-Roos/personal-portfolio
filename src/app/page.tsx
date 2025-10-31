@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar"; 
+import Footer from "@/components/Footer";
 import RotatingGreeting from "@/components/RotatingGreeting";
 import Image from "next/image";
 import LottieIcon from "@/components/LottieIcon";
@@ -82,7 +83,7 @@ export default function Home() {
           </div>
 
           {/*Services Section*/}
-          <div className="grid w-full max-w-full gap-6 grid-cols-2 grid-rows-6">
+          <div className="grid w-full max-w-full gap-6 grid-cols-2 grid-rows-5">
             <div className="flex flex-col justify-start items-start pt-9 pl-9 h-min row-span-1">
               <h2 className="text-6xl font-bold">What I bring to the table</h2>
             </div>
@@ -122,6 +123,9 @@ export default function Home() {
           <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
             <CTASection/>
           </div>
+
+          {/*Footer*/}
+          <Footer/>
         </main>
       </div>
     </div>

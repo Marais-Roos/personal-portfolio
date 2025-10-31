@@ -1,7 +1,4 @@
-import { a } from "framer-motion/client";
 import Image from "next/image";
-import { after } from "node:test";
-import React from "react";
 
 interface HeadingWithImageProps {
     level?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";

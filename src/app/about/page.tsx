@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import HeadingWithImage from "@/components/HeadingWithImage";
 import { CircleCheck } from 'lucide-react';
 import CTASection from "@/components/CTASection";
@@ -229,6 +230,8 @@ export default function About() {
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
                       <CTASection/>
                     </div>
+
+                    <Footer/>
                 </main>
             </div>
         </div>
