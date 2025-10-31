@@ -1,3 +1,4 @@
+// src/utils/data-utils.ts
 import { Service, Project } from "@/data/types"
 
 // 1. Utility to create the Service Lookup Map
@@ -8,8 +9,6 @@ import { Service, Project } from "@/data/types"
  * @returns A Record<string, Service> map.
  */
 export function createServiceLookupMap(services: Service[]): Record<string, Service> {
-    // Tailwind CSS Explanation: This is a standard JS/TS utility, no Tailwind involved here.
-    // It is highly efficient for quickly finding service details by slug later on.
     return services.reduce((acc, service) => {
         acc[service.slug] = service;
         return acc;
@@ -19,7 +18,6 @@ export function createServiceLookupMap(services: Service[]): Record<string, Serv
 // 2. Utility to filter projects by service slug
 /**
  * Filters all projects to find those that are tagged with the given service slug.
- * This is used for generating the carousels on the Home page.
  * @param serviceSlug The slug of the service to filter by.
  * @param allProjects The array of all projects.
  * @returns An array of projects that include the serviceSlug in their serviceSlugs array.
@@ -54,11 +52,14 @@ export function getServiceTitlesFromSlugs(slugs: string[], lookupMap: Record<str
  * @returns A sorted and limited array of recent projects.
  */
 export function getRecentProjects(allProjects: Project[], limit: number = 8): Project[] {
-    return allProjects
-        .toSorted((a, b) => {
+    // IMPORTANT: Create a copy of the array with .slice() before calling .sort() to prevent mutating the original array.
+    const sortedProjects = allProjects
+        .slice() 
+        .sort((a, b) => {
             // Converts date strings to Date objects for comparison.
             // b - a ensures newest date (larger value) comes first (descending sort).
             return new Date(b.date).getTime() - new Date(a.date).getTime();
-        })
-        .slice(0, limit); // Limits the array to the first 'limit' items
+        });
+
+    return sortedProjects.slice(0, limit); // Limits the array to the first 'limit' items
 }

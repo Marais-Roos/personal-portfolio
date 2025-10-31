@@ -1,3 +1,5 @@
+// src/data/types.ts
+
 export interface Service {
     slug: string;
     title: string;
@@ -17,8 +19,14 @@ export interface Project {
     date: string;
     mainImage: string;
     altText?: string;
+    
+    // NEW: Structured data type for the gallery (matches your Supabase JSONB column structure)
     galleryImages?: {
         url: string;
         alt: string;
     }[];
+
+    // NEW: Fields for SEO 
+    seoTitle?: string;
+    metaDescription?: string;
 }

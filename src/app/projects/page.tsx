@@ -1,36 +1,76 @@
+// src/app/projects/page.tsx
+
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+// Assuming Footer is in your project
+// import Footer from "@/components/Footer"; 
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Button from "@/components/Button";
 import ProjectCarousel from "@/components/ProjectCarousel";
-import { portfolioData } from "@/data/portfolio-data";
 import { Project, Service } from "@/data/types";
 import { 
   createServiceLookupMap, 
   filterProjectsForService 
 } from "@/utils/data-utils";
 
-// --- Data Setup: This block runs once efficiently ---
-const services: Service[] = portfolioData.services; 
-const projects: Project[] = portfolioData.projects;
+// NEW IMPORTS: Supabase client and mapping types
+import { createClient } from '@/utils/supabase/client';
+import { 
+    SupabaseService, 
+    SupabaseProject, 
+    mapSupabaseService, 
+    mapSupabaseProject 
+} from '@/data/supabase-types'; 
 
-// 1. Create the Service Lookup Map once
-const serviceLookupMap = createServiceLookupMap(services);
 
-// 2. Filter the service list to only show carousels for categories that actually have projects
-const servicesWithProjects = services
-    .filter(service => 
-        filterProjectsForService(service.slug, projects).length > 0
-    ).sort((a, b) => a.index - b.index);
+// --- ASYNC DATA FETCHING FUNCTION ---
+async function fetchAllPortfolioData(): Promise<{ services: Service[], projects: Project[] }> {
+    const supabase = createClient();
+    
+    // 1. Fetch Services
+    const { data: rawServices } = await supabase
+        .from('Services') // Using correct case-sensitive name
+        .select('*')
+        .order('index', { ascending: true }) 
+        .returns<SupabaseService[]>(); 
 
-// Helper to filter projects by service for the carousel
-function getRelevantProjects(serviceSlug: string): Project[] {
-    // This calls the reusable utility function from the /utils folder
-    return filterProjectsForService(serviceSlug, projects);
+    const services = rawServices ? rawServices.map(mapSupabaseService) : [];
+
+    // 2. Fetch all Projects
+    const { data: rawProjects, error: projectsError } = await supabase
+        .from('Projects') // Using correct case-sensitive name
+        // FIX: Request all columns ('*') and alias 'created_at' as 'date'
+        .select('*, created_at') 
+        .returns<SupabaseProject[]>();
+
+    if (projectsError) {
+        console.error("Error fetching projects:", projectsError);
+    }
+    const projects = rawProjects ? rawProjects.map(mapSupabaseProject) : [];
+    
+    return { services, projects };
 }
 
-export default function Projects() {
+
+// --- MAIN PROJECTS COMPONENT (Now async to wait for data) ---
+export default async function Projects() {
+    // AWAIT the data fetch
+    const { services, projects } = await fetchAllPortfolioData();
+
+    // 1. Create the Service Lookup Map once
+    const serviceLookupMap = createServiceLookupMap(services);
+
+    // 2. Filter the service list to only show carousels for categories that actually have projects
+    const servicesWithProjects = services
+        .filter(service => 
+            filterProjectsForService(service.slug, projects).length > 0
+        ).sort((a, b) => a.index - b.index);
+
+    // Helper to filter projects by service for the carousel
+    function getRelevantProjects(serviceSlug: string): Project[] {
+        return filterProjectsForService(serviceSlug, projects);
+    }
+
     const toolLogos = [
         { src: "/tools/Figma.svg", alt: "Figma Logo" },
         { src: "/tools/Webflow.svg", alt: "Webflow Logo" },
@@ -93,11 +133,11 @@ export default function Projects() {
                     {/*Call To Action Section*/}
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
                         <CTASection/>
-                    </div>    
-
-                    <Footer />        
+                    </div>            
+                    {/* Assuming Footer component is available */}
+                    {/* <Footer /> */}
                 </main>
             </div>
         </div>
     );
-}        
+}
