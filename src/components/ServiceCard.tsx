@@ -8,9 +8,10 @@ import { ArrowRight } from "lucide-react";
 
 interface ServiceCardProps {
     service: Service;
+    className?: string; //Optional additional CSS classes
 }
 
-export default function ServiceCard({service} : ServiceCardProps) {
+export default function ServiceCard({service, className} : ServiceCardProps) {
     const [isHovered, setIsHovered] = useState(false);
 
     const currentIconSrc = 
@@ -24,7 +25,7 @@ export default function ServiceCard({service} : ServiceCardProps) {
         <Link href={cardLink} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
             className={`flex flex-col p-8 gap-6 items-left bg-accent rounded-2xl transition-all 
                        duration-300 group hover:scale-[1.05] h-full
-                       ${isHovered ? 'bg-accent text-background-primary' : 'bg-background-secondary text-dominant'}`}
+                       ${isHovered ? 'bg-accent text-background-primary' : 'bg-background-secondary text-dominant'} ${className}`}
         >
             <div className="relative w-24 h-24 transition-all duration-300">
                 {currentIconSrc && (

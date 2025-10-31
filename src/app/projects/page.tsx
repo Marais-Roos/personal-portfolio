@@ -2,6 +2,32 @@ import Navbar from "@/components/Navbar";
 import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Button from "@/components/Button";
+import ProjectCarousel from "@/components/ProjectCarousel";
+import { portfolioData } from "@/data/portfolio-data";
+import { Project, Service } from "@/data/types";
+import { 
+  createServiceLookupMap, 
+  filterProjectsForService 
+} from "@/utils/data-utils";
+
+// --- Data Setup: This block runs once efficiently ---
+const services: Service[] = portfolioData.services; 
+const projects: Project[] = portfolioData.projects;
+
+// 1. Create the Service Lookup Map once
+const serviceLookupMap = createServiceLookupMap(services);
+
+// 2. Filter the service list to only show carousels for categories that actually have projects
+const servicesWithProjects = services
+    .filter(service => 
+        filterProjectsForService(service.slug, projects).length > 0
+    ).sort((a, b) => a.index - b.index);
+
+// Helper to filter projects by service for the carousel
+function getRelevantProjects(serviceSlug: string): Project[] {
+    // This calls the reusable utility function from the /utils folder
+    return filterProjectsForService(serviceSlug, projects);
+}
 
 export default function Projects() {
     const toolLogos = [
@@ -46,6 +72,24 @@ export default function Projects() {
                             </div>
                         </div>
                     </div>
+                    {/*Projects Section*/}
+                    <div className="w-full flex flex-col gap-24">
+                        {/* Iterate over each Service Category that has projects */}
+                        {servicesWithProjects.map(service => {
+                            const serviceProjects = getRelevantProjects(service.slug);
+                        
+                            return (
+                                <div key={service.slug} className="flex flex-col gap-8">
+                                    <ProjectCarousel
+                                        service={service} // Pass the full service object (has longDescription and title)
+                                        projects={serviceProjects} // Pass the filtered array of projects
+                                        serviceLookupMap={serviceLookupMap} // Pass the map for ProjectCard tags
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                    {/*Call To Action Section*/}
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
                         <CTASection/>
                     </div>            

@@ -15,7 +15,7 @@ export default function About() {
                 {/* Semantic main content area for the Hero Section and other page content */}
                 <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
                     {/*Hero Section Container*/}
-                    <div className="flex flex-col items-left p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10"> 
+                    <div className="flex flex-col items-left p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_2.png)]"> 
                         <HeadingWithImage
                             level="h1" // **The dynamic tag you needed!**
                             beforeText="Hey there, I'm Marais."
@@ -226,7 +226,7 @@ export default function About() {
                         </div>
                     </div>
                     {/*Call To Action Section*/}
-                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
+                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
                       <CTASection/>
                     </div>
                 </main>

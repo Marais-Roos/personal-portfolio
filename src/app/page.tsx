@@ -6,11 +6,32 @@ import LinkArrow from "@/components/LinkArrow";
 import CTASection from "@/components/CTASection";
 import ServiceCard from "@/components/ServiceCard";
 import { portfolioData } from "@/data/portfolio-data";
+import ProjectCarousel from "@/components/ProjectCarousel";
+import { Project, Service } from "@/data/types"; // Import types
+import { 
+  createServiceLookupMap, 
+  getRecentProjects // Utility for sorting/limiting
+} from "@/utils/data-utils";
 
-const services=portfolioData.services;
+const services: Service[] = portfolioData.services;
+const projects: Project[] = portfolioData.projects;
+
+// 1. Create the lookup map once for component efficiency
+const serviceLookupMap = createServiceLookupMap(services);
+
+// 2. Get the 8 most recent projects, sorted by date (the Home Page featured content)
+const featuredProjects = getRecentProjects(projects, 8);
+
+// 3. Create a mock Service object for the single carousel's heading/description
+const featuredService: Service = {
+    slug: 'featured-work',
+    title: 'Browse my latest projects', // The appropriate heading
+    longDescription: "",
+    index: 0,
+    shortDescription: '',
+};
 
 export default function Home() {
-
   const toolLogos = [
     { src: "/tools/Figma.svg", alt: "Figma Logo" },
     { src: "/tools/Webflow.svg", alt: "Webflow Logo" },
@@ -28,7 +49,7 @@ export default function Home() {
         {/* Semantic main content area for the Hero Section and other page content */}
         <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25"> 
           {/*Hero Section Container*/}
-          <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10"> 
+          <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]"> 
             {/*Hero Section Top*/}
             <div className="flex items-center w-full gap-6 max-w-full">
               {/*Image container*/}
@@ -66,17 +87,14 @@ export default function Home() {
               <h2 className="text-6xl font-bold">What I bring to the table</h2>
             </div>
             {services.map ((service, index) => (
-                <div className="row-span-2">
                   <ServiceCard 
                   key={service.slug}
                   service={service}
-                />
-                </div>
-                
+                  className="row-span-2"
+                /> 
               ))}
           </div>
           {/*About Section*/}
-
           <div className="p-9 bg-background-secondary w-full rounded-2xl gap-6 shadow-2xl shadow-black/10 flex items-center max-w-full">
             {/*Left*/}
             <div className="flex flex-col gap-5 flex-1">
@@ -90,9 +108,18 @@ export default function Home() {
               <Image src="/About Image.png" alt="A collection of images of Marais Roos, the first image his him doing a speech with a view from the back, the second is him being social, and the third is him doing work in his office." fill className="object-cover"/>
             </div>
           </div>
-
+          {/*Latest Projects Section*/}
+          {featuredProjects.length > 0 && (
+              <div className="w-full flex flex-col gap-12">
+                  <ProjectCarousel
+                      service={featuredService} // Pass the mock object for heading/description
+                      projects={featuredProjects} // Pass the sorted and limited projects
+                      serviceLookupMap={serviceLookupMap} // Pass the map for ProjectCard tags
+                  />
+              </div>
+          )}
           {/*Call To Action Section*/}
-          <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
+          <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
             <CTASection/>
           </div>
         </main>

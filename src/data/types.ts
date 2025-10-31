@@ -13,7 +13,7 @@ export interface Project {
     slug: string;
     title: string;
     description: string;
-    categorySlug: string;
+    serviceSlugs: string[];
     date: string;
     mainImage: string;
     altText?: string;
