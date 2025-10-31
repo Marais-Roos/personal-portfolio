@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import { Star } from "lucide-react";
 import { ReactNode } from "react";
+import Image from "next/image";
 
 export default function CTASection() {
   return (
@@ -11,7 +12,9 @@ export default function CTASection() {
         <div className="bg-background-secondary flex flex-col gap-4 p-4 rounded-2xl">
           <p className="text-base">"Marais fixed something on my screen, and suddenly everything started working smoothly. I guess that's what the kids call tech-savvy."</p>
           <div className="flex items-center gap-4">
-            <div className="aspect-square w-10 h-10 rounded-full bg-[url(/Avatar.png)] bg-cover bg-center"></div>
+            <div className="aspect-square w-10 h-10 rounded-full relative overflow-hidden">
+              <Image src="/Avatar.jpg" alt="" fill className="object-cover"/>
+            </div>
             <div className="flex flex-col">
               <div className="flex gap-0">
                 {Array(5).fill(0).map((_, index) => (

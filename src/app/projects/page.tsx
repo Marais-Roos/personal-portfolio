@@ -46,6 +46,9 @@ export default function Projects() {
                             </div>
                         </div>
                     </div>
+                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
+                        <CTASection/>
+                    </div>            
                 </main>
             </div>
         </div>
