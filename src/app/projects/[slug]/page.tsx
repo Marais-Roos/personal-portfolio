@@ -1,25 +1,29 @@
-// src/app/projects/[slug]/page.tsx (Final fix to silence the compiler error)
-
-import Navbar from "@/components/Navbar";
-import CTASection from "@/components/CTASection";
-import Image from "next/image";
+import Navbar from "@/components/Navbar"
+import Image from "next/image"
+import Footer from "@/components/Footer";
+import Link from "next/link";
+import Button from "@/components/Button";
+{/*Imports for CMS functionality*/}
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import Link from 'next/link';
-
 // Import Supabase client and mapping types
 import { createClient } from '@/utils/supabase/client';
-import { SupabaseProject, mapSupabaseProject } from '@/data/supabase-types';
-import { Project } from '@/data/types'; 
+import { SupabaseProject, SupabaseService, mapSupabaseProject, mapSupabaseService } from '@/data/supabase-types';
+import { Project, Service } from '@/data/types';
+
+// Import Utilities for service tags and mapping
+import { 
+    createServiceLookupMap,
+    getServiceTitlesFromSlugs 
+} from '@/utils/data-utils'; 
 
 
+// Define the structure for dynamic parameters passed to the page
 interface ProjectDetailPageProps {
     params: {
         slug: string;
     };
 }
-
 
 /**
  * Data Fetching Utility for a Single Project (Runs on the Server)
@@ -27,20 +31,34 @@ interface ProjectDetailPageProps {
 async function getProjectBySlug(slug: string): Promise<Project | null> {
     const supabase = createClient();
 
+    // Fetch the single project where slug matches the URL parameter
     const { data: rawProject, error } = await supabase
         .from('Projects')
-        .select('*, created_at as date') 
+        .select('*, created_at as date') // FIX: Alias created_at as date
         .eq('slug', slug)
-        .single() 
+        .single() // Expect only one row
         .returns<SupabaseProject>();
 
     if (error || !rawProject) {
         return null; 
     }
     
+    // Map the database response to the clean Project type
     return mapSupabaseProject(rawProject);
 }
 
+/**
+ * Fetch all services for the lookup map (separate function for clarity)
+ */
+async function fetchServices(): Promise<Service[]> {
+    const supabase = createClient();
+    const { data: rawServices } = await supabase
+        .from('Services')
+        .select('*')
+        .returns<SupabaseService[]>();
+
+    return rawServices ? rawServices.map(mapSupabaseService) : [];
+}
 
 /**
  * 1. MANDATORY: Tell Next.js which slugs exist for static generation.
@@ -59,14 +77,12 @@ export async function generateStaticParams() {
     }));
 }
 
-
 /**
  * 2. SEO / Dynamic Metadata Generation
  */
 export async function generateMetadata({ params }: ProjectDetailPageProps): Promise<Metadata> {
-    // FINAL FIX: Extract slug value synchronously before passing it to await.
-    const slug = params.slug;
-    const project = await getProjectBySlug(slug); 
+    const resolvedParams = await params;
+    const project = await getProjectBySlug(resolvedParams.slug);
 
     if (!project) {
         return {
@@ -75,87 +91,117 @@ export async function generateMetadata({ params }: ProjectDetailPageProps): Prom
         };
     }
 
+    // Use the SEO fields from the Project object, falling back to title/description
     return {
         title: project.seoTitle || project.title,
         description: project.metaDescription || project.description,
     };
 }
 
-
 /**
- * 3. The Main Project Detail Component
+ * 3. The Main Project Detail Component (Now an Async Server Component)
  */
 export default async function ProjectDetail({ params }: ProjectDetailPageProps) {
-    // FINAL FIX: Extract slug value synchronously before passing it to await.
-    // This forces the compiler to recognize 'slug' as a string, bypassing the bug.
-    const slug = params.slug;
+    // 1. Fetch data for the specific project
+    const resolvedParams = await params;
+    const project = await getProjectBySlug(resolvedParams.slug);
+    
+    // 2. Fetch all services and create lookup map for tags
+    const allServices = await fetchServices();
+    const serviceLookupMap = createServiceLookupMap(allServices);
 
-    const project = await getProjectBySlug(slug); 
-
-    // If project is null, render the Next.js 404 page
+    // 3. Handle 404
     if (!project) {
         notFound();
     }
+    
+    // Calculate dynamic data:
+    const publishDate = new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const serviceTitles = getServiceTitlesFromSlugs(project.serviceSlugs, serviceLookupMap);
 
-    return (
+
+    return(
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 px-18 ">
                 <Navbar />
-                
-                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-16 pt-25">
-                    
-                    {/* Back Link */}
-                    <Link href="/projects" className="flex items-center text-dominant hover:text-accent transition-colors self-start text-xl font-semibold gap-2">
-                        <ArrowLeft size={24} />
-                        Back to all projects
-                    </Link>
-
-                    {/* Project Hero Section (Image & Details) */}
-                    <div className="flex flex-col gap-12 w-full">
-                        {/* Title & Description */}
-                        <div className="flex flex-col gap-4">
-                            <h1 className="text-7xl font-black text-dominant">{project.title}</h1>
-                            {/* Project Description (Full body content) */}
-                            <p className="text-xl max-w-4xl">{project.description}</p>
+                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
+                    <div className="bg-background-secondary w-full rounded-2xl shadow-black/10 bg-[url(/background_1.png)] bg-center h-[500] absolute max-w-[1056] z-0"></div>
+                    <div className="flex flex-col items-left p-9 gap-8 relative z-1">
+                        {/*Project and project type*/}
+                        <div className="flex gap-6">
+                            <div className="px-4 py-2 bg-accent rounded-full">
+                                <p className="uppercase text-xl tracking-wider font-medium text-background-primary">Projects</p>
+                            </div>
+                            {/* Linked projects are displayed here */}
+                            {serviceTitles.map((title) => (
+                                <div key={title} className="px-4 py-2 border-2 border-accent rounded-full">
+                                    <p className="uppercase text-xl tracking-wider font-medium text-accent">{title}</p> 
+                                </div>
+                            ))}
                         </div>
-
-                        {/* Main Project Image */}
-                        <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-2xl shadow-black/20">
-                            <Image 
-                                src={project.mainImage} 
-                                alt={project.altText || project.title} 
-                                fill 
-                                className="object-cover"
-                            />
+                        {/*Author and publish details*/}
+                        <div className="flex items-center w-full gap-6 h-fit">
+                            <div className="w-12 h-12 aspect-square relative">
+                                <Image alt="Author avatar" src="/Avatar.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
+                            </div>
+                            <p className="text-2xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
+                            <div className="bg-dominant w-[1] h-6"></div>
+                            <p className="text-2xl">{publishDate}</p> {/*Date that the project was published*/}
+                            <div className="bg-dominant w-[1] h-6"></div>
+                            <div className="flex gap-4">
+                                <p className="text-2xl">Share: </p>
+                                <div className="flex gap-2"> {/*Links to share the project to social media*/}
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                        <Image src="/social_icons/LinkedIn.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    </Link>
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                        <Image src="/social_icons/Facebook.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    </Link>
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                        <Image src="/social_icons/X.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    {/* Project Gallery Section */}
-                    {project.galleryImages && project.galleryImages.length > 0 && (
-                        <div className="flex flex-col gap-8 w-full">
-                            <h2 className="text-5xl font-bold text-dominant">Image Gallery</h2>
-                            <div className="grid grid-cols-2 gap-6">
+                        {/*Project heading*/}
+                        <h1 className="font-black text-7xl capitalize">{project.title}</h1> {/*Project title*/}
+                        {/*Content*/}
+                        <div className="flex gap-6">
+                            {/*Main Content*/}
+                            <div className="flex flex-col flex-2 gap-8">
+                                {/*Image container*/}
+                                <div className="w-full aspect-2/1 relative bg-dominant rounded-2xl"> 
+                                    <Image src={project.mainImage} fill alt={project.altText || project.title}/> {/*Main project image*/}
+                                </div>
+                                {/*Project description*/}
+                                <p className="text-lg font-normal">{project.description}</p>
+                            </div>
+                            {/*CTA*/}
+                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit">
+                                <h2 className="font-bold text-5xl">My latest portfolio</h2>
+                                <Button variant="small" href="">I want the PDF</Button>
+                                <Button variant="outline" href="">Take me there</Button>
+                                <div className="flex flex-col items-left justify-start w-full gap-2">
+                                    <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
+                                    <p className="italic text-[10px]"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
+                                </div>
+                            </div>
+                        </div>
+                        {/*Gallery of project images*/}
+                        {project.galleryImages && project.galleryImages.length > 0 && (
+                            <div className="grid grid-cols-3 w-full gap-6">
                                 {project.galleryImages.map((image, index) => (
-                                    <div key={index} className="relative w-full aspect-4/3 rounded-xl overflow-hidden shadow-xl shadow-black/10">
-                                        <Image 
-                                            src={image.url} 
-                                            alt={image.alt} 
-                                            fill 
-                                            className="object-cover"
-                                        />
+                                    <div key={index} className="aspect-4/3 bg-background-secondary rounded-2xl relative">
+                                        <Image src={image.url} alt={image.alt} fill className="object-cover"/>
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                    )}
-                    
-                    {/* Call To Action Section */}
-                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
-                        <CTASection/>
+                        )}
                     </div>
+                    <Footer/>
                 </main>
-                {/* <Footer /> */}
             </div>
         </div>
     );
+    
 }

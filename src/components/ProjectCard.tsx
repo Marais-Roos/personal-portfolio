@@ -11,7 +11,7 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({project, serviceLookupMap} : ProjectCardProps) {
-    const projectUrl = `/projects/${project.slug}`
+    const projectUrl = `projects/${project.slug}`
     const [isHovered, setIsHovered] = useState(false);
 
     // Convert service slugs to human-readable titles using the map

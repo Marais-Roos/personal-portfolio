@@ -59,7 +59,7 @@ export default async function Projects() {
 
     // 1. Create the Service Lookup Map once
     const serviceLookupMap = createServiceLookupMap(services);
-
+    
     // 2. Filter the service list to only show carousels for categories that actually have projects
     const servicesWithProjects = services
         .filter(service => 
@@ -89,7 +89,7 @@ export default async function Projects() {
                         <div className="flex items-center w-full gap-6 max-w-full">
                             <div className="max-w-full flex-1 relative h-full aspect-3/4">
                                 <Image src="/Projects Hero.png" alt="Marais Roos" fill className="object-contain"/>
-                            </div>
+                        </div>
                             <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative align-left items-center">
                                 <h1 className="text-7xl text-dominant font-black">My Greatest Hits</h1>
                                 <p className="text-3xl">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
@@ -133,10 +133,11 @@ export default async function Projects() {
                     {/*Call To Action Section*/}
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
                         <CTASection/>
-                    </div>            
+                    </div>
                     {/* Assuming Footer component is available */}
                     {/* <Footer /> */}
                 </main>
+                {/* <Footer /> */}
             </div>
         </div>
     );
