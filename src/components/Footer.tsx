@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Footer(){
     return (
-        <footer className="flex flex-col gap-8 w-full max-w-full">
+        <footer className="flex flex-col gap-8 w-full max-w-[1056px]">
             {/*Top Footer Part*/}
             <div className="pt-8 border-t-2 border-background-secondary w-full flex flex-row gap-12 px-8">
                 {/*Top left*/}
