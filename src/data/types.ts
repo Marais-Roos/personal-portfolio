@@ -16,7 +16,7 @@ export interface Project {
     title: string;
     description: string;
     serviceSlugs: string[];
-    date: string;
+    created_at: string;
     mainImage: string;
     altText?: string;
     

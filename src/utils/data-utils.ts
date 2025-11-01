@@ -58,7 +58,7 @@ export function getRecentProjects(allProjects: Project[], limit: number = 8): Pr
         .sort((a, b) => {
             // Converts date strings to Date objects for comparison.
             // b - a ensures newest date (larger value) comes first (descending sort).
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         });
 
     return sortedProjects.slice(0, limit); // Limits the array to the first 'limit' items

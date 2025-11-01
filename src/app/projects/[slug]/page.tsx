@@ -44,12 +44,15 @@ async function getProjectBySlug(slug: string): Promise<Project | null> {
     console.log('[getProjectBySlug] error:', error);
 
     if (error || !rawProject) {
-        console.error('[getProjectBySlug] error:', error);
-        return null; 
+    console.error('[getProjectBySlug] error:', error);
+    return null;
     }
-    
+
+    // Force the type before using it
+    const project = rawProject as unknown as SupabaseProject;
+
     // Rename created_at → date before mapping
-    const projectWithDate = { ...rawProject, date: rawProject.created_at };
+    const projectWithDate = { ...project, date: project.created_at };
     return mapSupabaseProject(projectWithDate);
 }
 
@@ -122,7 +125,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
     }
     
     // Calculate dynamic data:
-    const publishDate = new Date(project.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const publishDate = new Date(project.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const serviceTitles = getServiceTitlesFromSlugs(project.serviceSlugs, serviceLookupMap);
 
 

@@ -29,7 +29,7 @@ export interface SupabaseProject {
     // Using a simple TEXT type in DB, separated by commas
     service_slugs: string; 
     
-    date: string;
+    created_at: string;
     main_image: string; 
     alt_text: string | null; 
     
@@ -75,7 +75,7 @@ export function mapSupabaseProject(p: SupabaseProject): Project {
         title: p.title,
         description: p.description,
         serviceSlugs: serviceSlugsArray,
-        date: p.date,
+        created_at: p.created_at,
         mainImage: p.main_image,
         altText: p.alt_text ?? undefined,
         galleryImages: p.gallery ?? undefined, 
