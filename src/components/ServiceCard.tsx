@@ -22,7 +22,7 @@ export default function ServiceCard({service, className} : ServiceCardProps) {
     const cardLink = service.sectionLink || '#';
 
     return (
-        <Link href={cardLink} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
+        <Link href={`/projects#${cardLink}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
             className={`flex flex-col p-8 gap-6 items-left bg-accent rounded-2xl transition-all 
                        duration-300 group hover:scale-[1.05] h-full
                        ${isHovered ? 'bg-accent text-background-primary' : 'bg-background-secondary text-dominant'} ${className}`}

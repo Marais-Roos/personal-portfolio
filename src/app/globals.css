@@ -21,6 +21,10 @@
   --font-sans: var(--font-poppins);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--color-background-primary);
   color: var(--color-dominant);
