@@ -34,17 +34,23 @@ async function getProjectBySlug(slug: string): Promise<Project | null> {
     // Fetch the single project where slug matches the URL parameter
     const { data: rawProject, error } = await supabase
         .from('Projects')
-        .select('*, created_at as date') // FIX: Alias created_at as date
+        .select('*')
         .eq('slug', slug)
         .single() // Expect only one row
         .returns<SupabaseProject>();
 
+    console.log('[getProjectBySlug] slug:', slug);
+    console.log('[getProjectBySlug] rawProject:', rawProject);
+    console.log('[getProjectBySlug] error:', error);
+
     if (error || !rawProject) {
+        console.error('[getProjectBySlug] error:', error);
         return null; 
     }
     
-    // Map the database response to the clean Project type
-    return mapSupabaseProject(rawProject);
+    // Rename created_at → date before mapping
+    const projectWithDate = { ...rawProject, date: rawProject.created_at };
+    return mapSupabaseProject(projectWithDate);
 }
 
 /**
@@ -170,8 +176,8 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             {/*Main Content*/}
                             <div className="flex flex-col flex-2 gap-8">
                                 {/*Image container*/}
-                                <div className="w-full aspect-2/1 relative bg-dominant rounded-2xl"> 
-                                    <Image src={project.mainImage} fill alt={project.altText || project.title}/> {/*Main project image*/}
+                                <div className="w-full aspect-2/1 relative bg-dominant rounded-2xl overflow-hidden"> 
+                                    <Image src={project.mainImage} fill alt={project.altText || project.title} className="object-cover"/> {/*Main project image*/}
                                 </div>
                                 {/*Project description*/}
                                 <p className="text-lg font-normal">{project.description}</p>
@@ -191,7 +197,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         {project.galleryImages && project.galleryImages.length > 0 && (
                             <div className="grid grid-cols-3 w-full gap-6">
                                 {project.galleryImages.map((image, index) => (
-                                    <div key={index} className="aspect-4/3 bg-background-secondary rounded-2xl relative">
+                                    <div key={index} className="aspect-4/3 bg-background-secondary rounded-2xl relative overflow-hidden">
                                         <Image src={image.url} alt={image.alt} fill className="object-cover"/>
                                     </div>
                                 ))}
