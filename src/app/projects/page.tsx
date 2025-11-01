@@ -120,7 +120,7 @@ export default async function Projects() {
                             const serviceProjects = getRelevantProjects(service.slug);
                         
                             return (
-                                <div id={service.sectionLink} key={service.slug} className="flex flex-col gap-8">
+                                <div id={service.sectionLink} key={service.slug} className="flex flex-col gap-8 scroll-mt-36">
                                     <ProjectCarousel
                                         service={service} // Pass the full service object (has longDescription and title)
                                         projects={serviceProjects} // Pass the filtered array of projects
