@@ -153,12 +153,12 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             <div className="w-12 h-12 aspect-square relative">
                                 <Image alt="Author avatar" src="/Avatar.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
                             </div>
-                            <p className="text-2xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
+                            <p className="text-xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
                             <div className="bg-dominant w-[1] h-6"></div>
-                            <p className="text-2xl">{publishDate}</p> {/*Date that the project was published*/}
+                            <p className="text-xl">{publishDate}</p> {/*Date that the project was published*/}
                             <div className="bg-dominant w-[1] h-6"></div>
                             <div className="flex gap-4">
-                                <p className="text-2xl">Share: </p>
+                                <p className="text-xl">Share: </p>
                                 <div className="flex gap-2"> {/*Links to share the project to social media*/}
                                     <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
                                         <Image src="/social_icons/LinkedIn.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
@@ -189,7 +189,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit">
                                 <h2 className="font-bold text-5xl">My latest portfolio</h2>
                                 <Button variant="small" href="">I want the PDF</Button>
-                                <Button variant="outline" href="">Take me there</Button>
+                                <Button variant="outline" href="/projects">Take me there</Button>
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
                                     <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
                                     <p className="italic text-[10px]"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
@@ -207,8 +207,8 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             </div>
                         )}
                     </div>
-                    <Footer/>
                 </main>
+                <Footer/>
             </div>
         </div>
     );

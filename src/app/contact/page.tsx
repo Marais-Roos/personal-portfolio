@@ -7,8 +7,9 @@ export default function Contact() {
             <div className="flex flex-col items-center mx-auto py-4 px-18 ">
                 <Navbar/>
                 <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
-                    <Footer/>
+                    
                 </main>
+                <Footer/>
             </div>
         </div>
     );

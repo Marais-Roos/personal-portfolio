@@ -31,7 +31,7 @@ export default function CTASection() {
         <p className="text-xl">Get an in-depth look at the work I do, and how I turn creative ideas into concrete digital assets.</p>
         <div className="flex gap-6">
           <Button href="/contact" variant="small">I want the PDF</Button>
-          <Button href="/contact" variant="outline">Take me there</Button>
+          <Button href="/projects" variant="outline">Take me there</Button>
         </div>
       </div>
     </div>

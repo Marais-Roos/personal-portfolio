@@ -231,8 +231,9 @@ export default function About() {
                       <CTASection/>
                     </div>
 
-                    <Footer/>
+                    
                 </main>
+                <Footer/>
             </div>
         </div>
     );

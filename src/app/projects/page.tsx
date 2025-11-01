@@ -21,6 +21,7 @@ import {
     mapSupabaseService, 
     mapSupabaseProject 
 } from '@/data/supabase-types'; 
+import Footer from "@/components/Footer";
 
 
 // --- ASYNC DATA FETCHING FUNCTION ---
@@ -134,10 +135,9 @@ export default async function Projects() {
                     <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
                         <CTASection/>
                     </div>
-                    {/* Assuming Footer component is available */}
-                    {/* <Footer /> */}
+                    
                 </main>
-                {/* <Footer /> */}
+                <Footer/>
             </div>
         </div>
     );

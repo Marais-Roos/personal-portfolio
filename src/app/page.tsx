@@ -1,8 +1,5 @@
-// src/app/page.tsx
-
 import Navbar from "@/components/Navbar"; 
-// Assuming Footer is in your project
-// import Footer from "@/components/Footer"; 
+import Footer from "@/components/Footer"; 
 import RotatingGreeting from "@/components/RotatingGreeting";
 import Image from "next/image";
 import LottieIcon from "@/components/LottieIcon";
@@ -178,11 +175,9 @@ export default async function Home() {
             <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
                 <CTASection/>
             </div>
-
-            {/*Footer*/}
-            {/* REMOVED: Footer component is not present in provided files, uncomment when created */}
-            {/* <Footer/> */}
             </main>
+            {/*Footer*/}
+            <Footer/>
         </div>
         </div>
     );
