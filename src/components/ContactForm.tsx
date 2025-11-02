@@ -202,6 +202,7 @@ export default function ContactForm() {
                                 className="mt-4"
                                 // Disable button while submitting
                                 disabled={isSubmitting}
+                                href="#"
                             >
                                 {isSubmitting ? 'Sending...' : 'Send Message'}
                             </Button>

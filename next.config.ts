@@ -6,7 +6,7 @@ import type { NextConfig } from "next";
 // We must ensure NEXT_PUBLIC_SUPABASE_URL is defined in .env.local.
 
 // Safely get the hostname from the full URL
-const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 
 let supabaseHostname = '';
 if (supabaseUrl) {

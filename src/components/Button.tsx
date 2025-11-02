@@ -10,6 +10,7 @@ interface ButtonProps {
     className?: string; //Optional additional CSS classes
     variant?: ButtonVariant; //Optional variant to determine styling
     type?: 'submit'| 'button' | 'reset';
+    disabled?: boolean;
 }
 
 const getVariantClasses = (variant: ButtonVariant = 'primary') => {
@@ -38,7 +39,7 @@ const getVariantClasses = (variant: ButtonVariant = 'primary') => {
     }
 };
 
-export default function Button({ href, children, className = "", variant="primary", type="" }: ButtonProps) {
+export default function Button({ href, children, className = "", variant="primary", type, disabled }: ButtonProps) {
     const variantClasses = getVariantClasses(variant);
 
     const classes = `
@@ -53,6 +54,8 @@ export default function Button({ href, children, className = "", variant="primar
         transition-all
 
         cursor-pointer
+
+        ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
 
         ${variantClasses.base}
         ${variantClasses.hover}
