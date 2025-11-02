@@ -9,6 +9,7 @@ interface ButtonProps {
     children: ReactNode; //The content inside the button
     className?: string; //Optional additional CSS classes
     variant?: ButtonVariant; //Optional variant to determine styling
+    type?: 'submit'| 'button' | 'reset';
 }
 
 const getVariantClasses = (variant: ButtonVariant = 'primary') => {
@@ -37,29 +38,45 @@ const getVariantClasses = (variant: ButtonVariant = 'primary') => {
     }
 };
 
-export default function Button({ href, children, className = "", variant="primary" }: ButtonProps) {
+export default function Button({ href, children, className = "", variant="primary", type="" }: ButtonProps) {
     const variantClasses = getVariantClasses(variant);
+
+    const classes = `
+        text-xl
+        flex
+        justify-center
+        items-center
+        px-6 py-4
+        gap-4
+        rounded-2xl
+        font-semibold
+        transition-all
+
+        cursor-pointer
+
+        ${variantClasses.base}
+        ${variantClasses.hover}
+
+        hover:scale-[1.1];
+
+        ${className}
+    `;
+
+    if (type) {
+        return (
+            <button
+                type={type} // Crucial for form submission!
+                className={classes}
+            >
+                {children}
+            </button>
+        );
+    }
+
     return (
         <Link   
-            href={href}
-            className={`
-                text-xl
-                flex
-                justify-center
-                items-center
-                px-6 py-4
-                gap-4
-                rounded-2xl
-                font-semibold
-                transition-all
-
-                ${variantClasses.base}
-                ${variantClasses.hover}
-
-                hover:scale-[1.1];
-
-                ${className}
-            `}
+            href={href || "#"} // Fallback to avoid TS error if href is missing, though it shouldn't be here
+            className={classes}
         >
             {children}
         </Link>

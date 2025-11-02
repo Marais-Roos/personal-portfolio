@@ -8,7 +8,7 @@ export default function CTASection() {
     <div className="flex items-center w-full bg-background-primary max-w-full p-9 rounded-3xl gap-6 shadow-xl shadow-black/10">
       {/*Left*/}
       <div className="flex flex-col flex-1 gap-5">
-        <h2 className="text-5xl font-bold">Check out my latest portfolio.</h2>
+        <h2 className="text-5xl font-bold leading-[1.2em]">Check out my <span className="font-black">latest portfolio</span>.</h2>
         <div className="bg-background-secondary flex flex-col gap-4 p-4 rounded-2xl">
           <p className="text-base">"Marais fixed something on my screen, and suddenly everything started working smoothly. I guess that's what the kids call tech-savvy."</p>
           <div className="flex items-center gap-4">

@@ -3,7 +3,7 @@ import Link from "next/link"
 
 export default function Footer(){
     return (
-        <footer className="flex flex-col gap-8 w-full max-w-[1056px]">
+        <footer className="flex flex-col gap-8 w-full max-w-[1056px] mt-24 mb-16">
             {/*Top Footer Part*/}
             <div className="pt-8 border-t-2 border-background-secondary w-full flex flex-row gap-12 px-8">
                 {/*Top left*/}
@@ -13,16 +13,16 @@ export default function Footer(){
                     </div>
                     <p className="text- font-normal">© Marais Roos 2025. All rights reserved.</p>
                     <div className="flex flex-row gap-4 items-left mt-4">
-                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="">
+                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="https://www.instagram.com/marais_roos/">
                             <Image src="/social_icons/Instagram.svg" alt="Instagram logo" width={24} height={24} className="object-contain"/>
                         </Link>
-                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="">
+                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="https://www.facebook.com/marais.roos.99/">
                             <Image src="/social_icons/Facebook.svg" alt="Facebook logo" width={24} height={24} className="object-contain"/>
                         </Link>
-                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="">
+                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="https://x.com/M_Roos09">
                             <Image src="/social_icons/X.svg" alt="X logo" width={24} height={24} className="object-contain"/>
                         </Link>
-                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="">
+                        <Link className="bg-background-secondary rounded-full w-12 h-12  relative aspect-square flex items-center justify-center hover:border-2 hover:border-dominant" href="https://www.linkedin.com/in/marais-roos/">
                             <Image src="/social_icons/LinkedIn.svg" alt="LinkedIn logo" width={24} height={24} className="object-contain"/>
                         </Link>
                     </div>
@@ -46,11 +46,13 @@ export default function Footer(){
                 </div>
             </div>
             {/*Bottom Footer Part*/}
+            {/*
             <div className="pt-8 border-t-2 border-background-secondary w-full flex flex-row gap-12 px-8">
                 <p>
                     <Link href="" className="hover:underline underline-offset-6">Privacy Policy</Link> / <Link href="" className="hover:underline underline-offset-6">Cookie Policy</Link>
                 </p>
             </div>
+            */}
         </footer>
     );
 }
