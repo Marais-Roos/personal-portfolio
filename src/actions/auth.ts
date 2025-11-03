@@ -1,7 +1,7 @@
 // src/actions/auth.ts
 'use server';
 
-import { createClient } from '@/utils/supabase/client';
+import { createServerActionClient } from '@/utils/supabase/server'; 
 import { redirect } from 'next/navigation';
 
 /**
@@ -12,22 +12,21 @@ export async function signIn(formData: FormData) {
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
     
-    // 1. Initialize the public Supabase client (runs on the server for security)
-    const supabase = createClient();
+    // 1. Create a Supabase Client that runs on the server and is cookie-aware
+    const supabase = await createServerActionClient();
 
     // 2. Perform the sign-in
     const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+        // FIX: Using explicit longhand notation to resolve the TypeScript error
+        email: email, 
+        password: password, 
     });
 
     if (error) {
         console.error("Sign-in failed:", error.message);
-        // Return an object with an error message to the client component
         return { error: 'Authentication failed. Please check your email and password.' };
     }
     
-    // 3. On success, redirect to the protected admin page
     redirect('/admin');
 }
 
@@ -35,7 +34,7 @@ export async function signIn(formData: FormData) {
  * Handles user sign-out.
  */
 export async function signOut() {
-    const supabase = createClient();
+    const supabase = await createServerActionClient();
     
     // Clear the session on Supabase
     await supabase.auth.signOut();
@@ -48,8 +47,7 @@ export async function signOut() {
  * Helper to get the current session on the server.
  */
 export async function getSession() {
-    const supabase = createClient();
-    // This is the core function that reads the secure cookie and validates the session
+    const supabase = await createServerActionClient();
     const { data: { session } } = await supabase.auth.getSession();
     return session;
 }
