@@ -150,8 +150,8 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         </div>
                         {/*Author and publish details*/}
                         <div className="flex items-center w-full gap-6 h-fit">
-                            <div className="w-12 h-12 aspect-square relative">
-                                <Image alt="Author avatar" src="/Avatar.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
+                            <div className="w-12 h-12 aspect-square relative overflow-hidden rounded-full">
+                                <Image alt="Author avatar" src="/Profile.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
                             </div>
                             <p className="text-xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
                             <div className="bg-dominant w-[1] h-6"></div>
@@ -179,7 +179,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             {/*Main Content*/}
                             <div className="flex flex-col flex-2 gap-8">
                                 {/*Image container*/}
-                                <div className="w-full aspect-2/1 relative bg-dominant rounded-2xl overflow-hidden"> 
+                                <div className="w-full aspect-4/3 relative bg-dominant rounded-2xl overflow-hidden"> 
                                     <Image src={project.mainImage} fill alt={project.altText || project.title} className="object-cover"/> {/*Main project image*/}
                                 </div>
                                 {/*Project description*/}
