@@ -15,8 +15,8 @@ export async function createServerActionClient() {
 
   return createServerClient(
     // Public keys are automatically picked up from environment
-    process.env.SUPABASE_URL!,
-    process.env.SUPABASE_ANON_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         // Use the synchronous methods on the AWAITED cookieStore
