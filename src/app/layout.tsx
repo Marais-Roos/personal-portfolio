@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; //Import Poppins font from Google fonts
 import "./globals.css";
 
+import Navbar from "@/components/Navbar";
 
 //Define new Poppins font with specific weights and subsets
 const poppins = Poppins({
@@ -28,9 +29,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* Applly the Poppins font to the body */}
-      <body className={`${poppins.variable} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} antialiased`}>
+            {children}        
         <SpeedInsights/>
         <Analytics/>
       </body>

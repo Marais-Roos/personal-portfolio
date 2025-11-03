@@ -35,7 +35,7 @@ export default function ServiceCard({service, className} : ServiceCardProps) {
                     <div className="w-full h-full bg-dominant rounded-lg"></div>
                 )}
             </div>
-            <h3 className="font-bold text-5xl">{service.title}</h3>
+            <h3 className="font-bold text-3xl md:text-4xl lg:text-5xl w-fill">{service.title}</h3>
             <p className="text-lg grow">{service.shortDescription}</p>
             <div className={`flex items-left font-semibold text-xl transition-all gap-4 
                              ${isHovered ? 'gap-6' : 'gap-4'}

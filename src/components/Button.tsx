@@ -11,6 +11,7 @@ interface ButtonProps {
     variant?: ButtonVariant; //Optional variant to determine styling
     type?: 'submit'| 'button' | 'reset';
     disabled?: boolean;
+    onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
 }
 
 const getVariantClasses = (variant: ButtonVariant = 'primary') => {
@@ -39,7 +40,7 @@ const getVariantClasses = (variant: ButtonVariant = 'primary') => {
     }
 };
 
-export default function Button({ href, children, className = "", variant="primary", type, disabled }: ButtonProps) {
+export default function Button({ href, children, className = "", variant="primary", type, disabled, onClick }: ButtonProps) {
     const variantClasses = getVariantClasses(variant);
 
     const classes = `
@@ -52,6 +53,8 @@ export default function Button({ href, children, className = "", variant="primar
         rounded-2xl
         font-semibold
         transition-all
+
+        md:text-lg md:px-4 md:py-2
 
         cursor-pointer
 
@@ -70,6 +73,7 @@ export default function Button({ href, children, className = "", variant="primar
             <button
                 type={type} // Crucial for form submission!
                 className={classes}
+                onClick={onClick}
             >
                 {children}
             </button>
@@ -80,6 +84,7 @@ export default function Button({ href, children, className = "", variant="primar
         <Link   
             href={href || "#"} // Fallback to avoid TS error if href is missing, though it shouldn't be here
             className={classes}
+            onClick={onClick}
         >
             {children}
         </Link>

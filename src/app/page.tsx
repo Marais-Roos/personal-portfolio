@@ -95,90 +95,88 @@ export default async function Home() {
 
     return (
         <div className="bg-background-primary min-h-screen">
-        <div className="flex flex-col items-center mx-auto py-4 px-18 ">
-            {/* The Navbar component */}
-            <Navbar />
+            <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
+                <div className="sticky top-6 w-full flex justify-center z-10">
+                    <Navbar/>
+                </div>
 
-            {/* Semantic main content area for the Hero Section and other page content */}
-            <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25"> 
-            {/*Hero Section Container*/}
-            <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]"> 
-                {/*Hero Section Top*/}
-                <div className="flex items-center w-full gap-6 max-w-full">
-                {/*Image container*/}
-                <div className="max-w-full flex-1 relative h-full aspect-square">
-                    <Image src="/Intro Image.png" alt="Marais Roos" fill className="object-cover"/>
-                </div>
-                {/*Content of top part of header*/}
-                <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative">
-                    <RotatingGreeting/>
-                    <p className="text-2xl">I'm Marais. I once studied serious things like informatics and engineering... now I make pretty websites that actually work.</p>
-                    <div className="absolute top-[-20] right-[-16]">
-                    <LottieIcon size={84} src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/lottie.json"/>
+                <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-12 max-w-full">
+                    {/*Hero Section Container*/}
+                    <div className="flex flex-col items-center p-6 lg:p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]"> 
+                        {/*Hero Section Top*/}
+                        <div className="flex flex-col md:flex-row items-center w-full gap-6 max-w-full">
+                        {/*Image container*/}
+                        <div className="max-w-full flex-1 relative h-full w-full aspect-square">
+                            <Image src="/Intro Image.png" alt="Marais Roos" fill className="object-cover"/>
+                        </div>
+                        {/*Content of top part of header*/}
+                        <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative items-center md:items-left">
+                            <RotatingGreeting/>
+                            <p className="text-xl md:text-2xl text-center md:text-left">I'm Marais. I once studied serious things like informatics and engineering... now I make pretty websites that actually work.</p>
+                            <div className="absolute top-[-72] right-0 lg:top-[-72] md:top-[-24]">
+                                <LottieIcon className="w-16 h-16 lg:w-24 lg:h-24" src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/lottie.json"/>
+                            </div>
+                        </div>
+                        </div>
+                        {/*Hero Section Middle*/}
+                        <CTASection/>
+                        {/*Hero Section Bottom*/}
+                        <div className="flex flex-col w-full max-w-full gap-4 items-center">
+                        <h2 className="text-l font-medium">Some of the tools in my shed:</h2>
+                        <div className="flex gap-6 justify-center items-center w-full flex-wrap md:gap-9">
+                            {toolLogos.map((logo) => (
+                            <div key={logo.src} className="h-7 w-20 relative shrink-0">
+                                <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
+                            </div>
+                            ))}
+                        </div>
+                        </div>
                     </div>
-                </div>
-                </div>
-                {/*Hero Section Middle*/}
-                <CTASection/>
-                
-                {/*Hero Section Bottom*/}
-                <div className="flex flex-col w-full max-w-full gap-4 items-center">
-                <h2 className="text-l font-medium">Some of the tools in my shed:</h2>
-                <div className="flex gap-9 justify-center items-center w-full h-7">
-                    {toolLogos.map((logo) => (
-                    <div key={logo.src} className="h-7 w-20 relative shrink-0">
-                        <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
+                        
+                    {/*Services Section*/}
+                    <div className=" flex flex-col md:grid w-full max-w-full gap-6 grid-cols-1 md:grid-cols-2 grid-rows-5">
+                        <div className="flex flex-col justify-start items-start lg:pt-9 lg:pl-9 md:pt-8 md:pl-8 h-min row-span-1">
+                            <h2 className="capitalize text-4xl md:text-5xl lg:text-6xl font-bold">What I bring to the table</h2>
+                        </div>
+                        {services.map ((service, index) => (
+                                <ServiceCard 
+                                key={service.slug}
+                                service={service}
+                                className="row-span-2"
+                            /> 
+                            ))}
                     </div>
-                    ))}
-                </div>
-                </div>
-            </div>
-
-            {/*Services Section*/}
-            <div className="grid w-full max-w-full gap-6 grid-cols-2 grid-rows-5">
-                <div className="flex flex-col justify-start items-start pt-9 pl-9 h-min row-span-1">
-                <h2 className="text-6xl font-bold">What I bring to the table</h2>
-                </div>
-                {services.map ((service, index) => (
-                        <ServiceCard 
-                        key={service.slug}
-                        service={service}
-                        className="row-span-2"
-                    /> 
-                    ))}
-            </div>
-            {/*About Section*/}
-            <div className="p-9 bg-background-secondary w-full rounded-2xl gap-6 shadow-2xl shadow-black/10 flex items-center max-w-full">
-                {/*Left*/}
-                <div className="flex flex-col gap-5 flex-1">
-                <h2 className="text-5xl font-bold">Hey, I'm Marais Roos</h2>
-                <p className="text-xl font-base">I'm a creatively chaotic web designer and developer who took the scenic route into tech. With roots in engineering and informatics (plus a brief, mildly traumatic stint in finance and insurance), I've come to appreciate the magic that happens when structure meets imagination.</p>
-                <p className="text-xl font-base">These days, I focus on designing and building clean, functional websites that balance logic with creativity. I’m at my best when solving problems, simplifying complexity, and adding a little personality to every pixel.</p>
-                <LinkArrow href="/about">Read my full story</LinkArrow>
-                </div>
-                {/*Right*/}
-                <div className="max-w-full flex-1 relative h-full aspect-3/4" >
-                <Image src="/About Image.png" alt="A collection of images of Marais Roos, the first image his him doing a speech with a view from the back, the second is him being social, and the third is him doing work in his office." fill className="object-cover"/>
-                </div>
-            </div>
-            {/*Latest Projects Section*/}
-            {featuredProjects.length > 0 && (
-                <div className="w-full flex flex-col gap-12">
-                    <ProjectCarousel
-                        service={featuredService} // Pass the mock object for heading/description
-                        projects={featuredProjects} // Pass the sorted and limited projects
-                        serviceLookupMap={serviceLookupMap} // Pass the map for ProjectCard tags
-                    />
-                </div>
-            )}
-            {/*Call To Action Section*/}
-            <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
-                <CTASection/>
-            </div>
-            </main>
-            {/*Footer*/}
+                    {/*About Section*/}
+                    <div className="p-6 md:p-8 lg:p-9 bg-background-secondary w-full rounded-2xl gap-6 shadow-2xl shadow-black/10 flex flex-col md:flex-row items-center max-w-full">
+                        {/*Left*/}
+                        <div className="flex flex-col gap-5 flex-1">
+                        <h2 className="text-3xl md:text-5xl font-bold">Hey, I'm Marais Roos</h2>
+                        <p className="text-lg md:text-xl font-base">I'm a creatively chaotic web designer and developer who took the scenic route into tech. With roots in engineering and informatics (plus a brief, mildly traumatic stint in finance and insurance), I've come to appreciate the magic that happens when structure meets imagination.</p>
+                        <p className="text-lg md:text-xl font-base">These days, I focus on designing and building clean, functional websites that balance logic with creativity. I’m at my best when solving problems, simplifying complexity, and adding a little personality to every pixel.</p>
+                        <LinkArrow href="/about">Read my full story</LinkArrow>
+                        </div>
+                        {/*Right*/}
+                        <div className="max-w-full flex-1 relative h-full w-full aspect-3/4" >
+                            <Image src="/About Image.png" alt="A collection of images of Marais Roos, the first image his him doing a speech with a view from the back, the second is him being social, and the third is him doing work in his office." fill className="object-cover"/>
+                        </div>
+                    </div>
+                    {/*Latest Projects Section*/}
+                    {featuredProjects.length > 0 && (
+                        <div className="w-full flex flex-col gap-12">
+                            <ProjectCarousel
+                                service={featuredService} // Pass the mock object for heading/description
+                                projects={featuredProjects} // Pass the sorted and limited projects
+                                serviceLookupMap={serviceLookupMap} // Pass the map for ProjectCard tags
+                            />
+                        </div>
+                    )}
+                    {/*Call To Action Section*/}
+                    <div className="flex flex-col items-center lg:p-9 p-6 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
+                        <CTASection/>
+                    </div>
+                </main>
             <Footer/>
-        </div>
+            </div>
         </div>
     );
 }

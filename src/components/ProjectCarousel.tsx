@@ -39,16 +39,16 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
     const { title, longDescription } = service;
 
     return (
-        <div className="flex flex-col gap-8 w-full">
+        <div className="flex flex-col gap-8 w-full overflow-visible">
             {/* Header and Controls */}
-            <div className="flex justify-end items-end align-end gap-18">
+            <div className="flex flex-col md:flex-row items-start md:items-end gap-8 md:gap-18">
                 {/* Left: Title and Description */}
-                <div className="flex flex-col gap-5 flex-1">
-                    <h2 className="text-6xl font-bold">{title}</h2>
+                <div className="flex flex-col gap-5 flex-2">
+                    <h2 className="text-5xl lg:text-6xl font-extrabold">{title}</h2>
                     <p className="text-xl">{longDescription}</p>
                 </div>
                 {/* Right: Controls */}
-                <div className="flex gap-4 shrink-0 h-fit">
+                <div className="flex flex-1 gap-4 shrink-0 h-fit md:items-end md:justify-end">
                     <div 
                         className="h-16 w-16 rounded-full bg-accent flex items-center justify-center text-background-primary hover:bg-dominant transition-colors cursor-pointer" 
                         onClick={() =>scroll('left')}
@@ -66,17 +66,23 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
                 </div>
             </div>
             {/* Carousel Content Container (Horizontal Scroll) */}
-            <div ref={scrollRef}
-                className="flex gap-6 overflow-x-auto px-9 py-4 snap-x snap-mandatory
+            <div className="relative w-full overflow-visible">
+                <div ref={scrollRef}
+                className="flex gap-6 px-9 py-4
+                            overflow-x-scroll overflow-y-visible
+                            snap-x snap-mandatory scroll-smooth
                             [&::-webkit-scrollbar]:h-0
                             [-ms-overflow-style]:none
-                            [scrollbar-width]:none"   
-            >
-                {projects.map((project) =>
-                    <div key={project.slug} className="snap-start">
-                        <ProjectCard project={project} serviceLookupMap={serviceLookupMap}/>
-                    </div>)}
+                            [scrollbar-width]:none
+                            relative z-20"   
+                >
+                    {projects.map((project) =>
+                        <div key={project.slug} className="snap-start">
+                            <ProjectCard project={project} serviceLookupMap={serviceLookupMap}/>
+                        </div>)}
+                </div>
             </div>
+            
         </div>
     );
 }

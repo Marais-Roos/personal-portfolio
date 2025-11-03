@@ -5,10 +5,10 @@ import type {LottiePlayer} from "lottie-web";
 
 interface LottieIconProps {
     src: string;
-    size?: number;
+    className?: string;
 }
 
-export default function LottieIcon({ src, size = 24 }: LottieIconProps) {
+export default function LottieIcon({ src, className = 'w-6 h-6' }: LottieIconProps) {
     const ref = useRef<HTMLDivElement>(null);
     const [lottie, setLottie] = useState<LottiePlayer | null>(null);
 
@@ -38,8 +38,7 @@ export default function LottieIcon({ src, size = 24 }: LottieIconProps) {
     return (
         <div
             ref={ref}
-            style={{ width: size, height: size }}
-            className="inline-block shrink-0" // Prevents the icon from being compressed
+            className={`inline-block shrink-0 ${className}`} // Prevents the icon from being compressed
         />
     );
 }

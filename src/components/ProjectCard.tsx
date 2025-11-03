@@ -19,8 +19,8 @@ export default function ProjectCard({project, serviceLookupMap} : ProjectCardPro
 
     return (
         <Link href={projectUrl} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}
-            className={`flex flex-col gap-6 items-left bg-accent rounded-2xl transition-all border-4 border-background-secondary
-                       duration-300 group hover:scale-[1.01] h-full w-100 overflow-hidden hover:border-accent
+            className={`flex flex-col gap-0 items-left bg-accent rounded-2xl transition-all border-4 border-background-secondary
+                       duration-300 group hover:scale-[1.01] h-full md:w-100 w-[calc(100vw-48px)] overflow-hidden hover:border-accent
                        ${isHovered ? 'bg-accent text-background-primary' : 'bg-background-secondary text-dominant'}`}
         >
             {/*Image container*/}
@@ -32,7 +32,7 @@ export default function ProjectCard({project, serviceLookupMap} : ProjectCardPro
                 <div className="flex flex-col gap-4 p-4 ">
                     {/* Service Tags (using the titles for elegance) */}
                     
-                    <h3 className="text-3xl font-medium">{project.title}</h3>
+                    <h3 className=" text-2xl md:text-3xl font-medium">{project.title}</h3>
                     <div className={`flex items-left font-semibold text-base transition-all gap-4 
                              ${isHovered ? 'gap-6' : 'gap-4'}
                           `}>

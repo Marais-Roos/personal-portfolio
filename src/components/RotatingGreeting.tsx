@@ -59,7 +59,7 @@ export default function RotatingGreeting() {
   return (
     // Outer container acts as the fixed window (h-[4.5rem] from previous steps)
     <h1
-      className="text-7xl font-black text-dominant relative overflow-hidden h-24 w-full flex items-start justify-start
+      className="text-5xl md:text-6xl lg:text-7xl font-black text-dominant relative overflow-hidden h-14 md:h-28 lg:h-24 w-full flex items-end justify-start pb-3 md:pb-1.5  
       "
     >
        
@@ -70,7 +70,7 @@ export default function RotatingGreeting() {
           // Key change triggers the exit/enter sequence
           key={GREETINGS[index]} 
           
-          className="absolute top-0 left-0 w-full text-left" 
+          className="absolute bottom-2 md:bottom-1.5 left-0 w-full text-center md:text-left" 
           
           variants={animationVariants}
           initial="enter" // Start below
