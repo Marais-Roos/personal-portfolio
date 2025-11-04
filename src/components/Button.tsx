@@ -44,7 +44,7 @@ export default function Button({ href, children, className = "", variant="primar
     const variantClasses = getVariantClasses(variant);
 
     const classes = `
-        text-xl
+        text-xl text-center
         flex
         justify-center
         items-center
@@ -53,8 +53,8 @@ export default function Button({ href, children, className = "", variant="primar
         rounded-2xl
         font-semibold
         transition-all
-
-        md:text-lg md:px-4 md:py-2
+        w-fit
+        
 
         cursor-pointer
 

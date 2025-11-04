@@ -44,8 +44,8 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
             <div className="flex flex-col md:flex-row items-start md:items-end gap-8 md:gap-18">
                 {/* Left: Title and Description */}
                 <div className="flex flex-col gap-5 flex-2">
-                    <h2 className="text-5xl lg:text-6xl font-extrabold">{title}</h2>
-                    <p className="text-xl">{longDescription}</p>
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold">{title}</h2>
+                    <p className="text-lg md:text-xl">{longDescription}</p>
                 </div>
                 {/* Right: Controls */}
                 <div className="flex flex-1 gap-4 shrink-0 h-fit md:items-end md:justify-end">

@@ -82,34 +82,37 @@ export default async function Projects() {
 
     return (
         <div className="bg-background-primary min-h-screen">
-            <div className="flex flex-col items-center mx-auto py-4 px-18 ">
+            <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
                 {/* The Navbar component */}
                 <Navbar />
-                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
-                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
-                        <div className="flex items-center w-full gap-6 max-w-full">
-                            <div className="max-w-full flex-1 relative h-full aspect-3/4">
+                <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">
+                    {/*Hero Section Container*/}
+                    <div className="flex flex-col items-center p-6 lg:p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
+                        {/*Hero Section Top*/}
+                        <div className="flex flex-col md:flex-row items-center w-full gap-6 max-w-full">
+                            <div className="max-w-full flex-1 relative w-full aspect-3/4">
                                 <Image src="/Projects Hero.png" alt="Marais Roos" fill className="object-contain"/>
-                        </div>
-                            <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative align-left items-center">
-                                <h1 className="text-7xl text-dominant font-black">My Greatest Hits</h1>
-                                <p className="text-3xl">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
-                                <div className="w-full flex flex-row items-left">
-                                    <Button href="" variant="primary">Download the PDF version</Button>
-                                </div>
+                            </div>
+                            <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative md:items-start items-center">
+                                <h1 className="text-center md:text-left text-5xl md:text-6xl lg:text-7xl font-black text-dominant relative overflow-hidden w-full">My Greatest Hits</h1>
+                                <p className="text-xl lg:text-3xl text-center md:text-left">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
+                            
+                                <Button href="" variant="primary">Download the PDF</Button>
+                            
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
-                                    <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
-                                    <p className="italic text-[10px]"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
+                                    <p className="text-xs text-center md:text-left"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
+                                    <p className="italic text-[10px] text-center md:text-left"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
                                 </div>
                             </div>
                         </div>
+                        {/*Hero Section Bottom*/}
                         <div className="flex flex-col w-full max-w-full gap-4 items-center">
-                            <h2 className="text-l font-medium">Some of the tools in my shed:</h2>
-                            <div className="flex gap-9 justify-center items-center w-full h-7">
+                            <h2 className="text-left font-medium">Some of the tools in my shed:</h2>
+                            <div className="flex gap-6 justify-center items-center w-full flex-wrap md:gap-9">
                                 {toolLogos.map((logo) => (
-                                    <div key={logo.src} className="h-7 w-20 relative shrink-0">
-                                        <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
-                                    </div>
+                                <div key={logo.src} className="h-7 w-20 relative shrink-0">
+                                    <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
+                                </div>
                                 ))}
                             </div>
                         </div>
@@ -121,7 +124,7 @@ export default async function Projects() {
                             const serviceProjects = getRelevantProjects(service.slug);
                         
                             return (
-                                <div id={service.sectionLink} key={service.slug} className="flex flex-col gap-8 scroll-mt-36">
+                                <div id={service.sectionLink} key={service.slug} className="w-full flex flex-col gap-12 scroll-mt-36">
                                     <ProjectCarousel
                                         service={service} // Pass the full service object (has longDescription and title)
                                         projects={serviceProjects} // Pass the filtered array of projects
@@ -130,10 +133,6 @@ export default async function Projects() {
                                 </div>
                             );
                         })}
-                    </div>
-                    {/*Call To Action Section*/}
-                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
-                        <CTASection/>
                     </div>
                     
                 </main>
