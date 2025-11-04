@@ -57,12 +57,11 @@ export default function Navbar() {
                 `}>
                 
                 {/* Logo */}
-                <div className="relative shrink-0 w-36 md:w-40 lg:w-auto">
+                <div className="relative shrink-0 h-8 md:h-12 aspect-46/16 md:w-40 lg:w-auto">
                     <Image
                         src="/Logo-blue.svg"
                         alt="Marais Roos Logo"
-                        width={180.43}
-                        height={62}
+                        fill
                         className="object-contain"
                     />
                 </div>
@@ -117,7 +116,7 @@ export default function Navbar() {
                         onClick={toggleMenu}
                         className="
                             lg:hidden md:flex max-md:flex items-center justify-center
-                            w-12 h-12 text-dominant hover:text-accent transition-colors
+                            w-8 h-8 text-dominant hover:text-accent transition-colors
                             cursor-pointer
                         "
                         aria-label="Toggle navigation menu"

@@ -13,7 +13,9 @@ export default function About() {
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
                 {/* The Navbar component */}
-                <Navbar />
+                <div className="sticky top-6 w-full flex justify-center z-10">
+                    <Navbar/>
+                </div>
         
                 {/* Semantic main content area for the Hero Section and other page content */}
                 <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">

@@ -84,7 +84,9 @@ export default async function Projects() {
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
                 {/* The Navbar component */}
-                <Navbar />
+                <div className="sticky top-6 w-full flex justify-center z-10">
+                    <Navbar/>
+                </div>
                 <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">
                     {/*Hero Section Container*/}
                     <div className="flex flex-col items-center p-6 lg:p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">

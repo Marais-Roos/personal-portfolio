@@ -45,7 +45,9 @@ export default function Contact() {
     return(
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
-                <Navbar/>
+                <div className="sticky top-6 w-full flex justify-center z-10">
+                    <Navbar/>
+                </div>
                 <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-8 max-w-full">
                     <div className='flex flex-col gap-5 w-full '>
                         <p className='text-left uppercase font-2xl font-semibold text-accent mb-[-12]'>Let's talk</p>

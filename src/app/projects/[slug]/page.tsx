@@ -131,51 +131,56 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
 
     return(
         <div className="bg-background-primary min-h-screen">
-            <div className="flex flex-col items-center mx-auto py-4 px-18 ">
-                <Navbar />
-                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
-                    <div className="bg-background-secondary w-full rounded-2xl shadow-black/10 bg-[url(/background_1.png)] bg-center h-[500] absolute max-w-[1056] z-0"></div>
-                    <div className="flex flex-col items-left p-9 gap-8 relative z-1">
-                        {/*Project and project type*/}
-                        <div className="flex gap-6">
-                            <div className="px-4 py-2 bg-accent rounded-full">
-                                <p className="uppercase text-xl tracking-wider font-medium text-background-primary">Projects</p>
-                            </div>
-                            {/* Linked projects are displayed here */}
-                            {serviceTitles.map((title) => (
-                                <div key={title} className="px-4 py-2 border-2 border-accent rounded-full">
-                                    <p className="uppercase text-xl tracking-wider font-medium text-accent">{title}</p> 
+            <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
+                <div className="sticky top-6 w-full flex justify-center z-10">
+                    <Navbar/>
+                </div>
+                <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">
+                        
+                        {/*Hero Section*/}
+                        <div className="flex flex-col items-left p-6 lg:p-9 bg-background-secondary w-full rounded-2xl gap-8 lg:gap-12 shadow-2xl shadow-black/10 bg-[url(/background_2.png)] bg-center pb-50 lg:pb-50">
+                            {/*Project and project type*/}
+                            <div className="flex gap-4 md:gap-6 flex-wrap">
+                                <div className="px-4 py-2 bg-accent rounded-full">
+                                    <p className="uppercase text-base lg:text-xl tracking-wider font-medium text-background-primary">Projects</p>
                                 </div>
-                            ))}
-                        </div>
-                        {/*Author and publish details*/}
-                        <div className="flex items-center w-full gap-6 h-fit">
-                            <div className="w-12 h-12 aspect-square relative overflow-hidden rounded-full">
-                                <Image alt="Author avatar" src="/Profile.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
+                                {/* Linked projects are displayed here */}
+                                {serviceTitles.map((title) => (
+                                    <div key={title} className="px-4 py-2 border-2 border-accent rounded-full">
+                                        <p className="uppercase text-base lg:text-xl tracking-wider font-medium text-accent">{title}</p> 
+                                    </div>
+                                ))}
                             </div>
-                            <p className="text-xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
-                            <div className="bg-dominant w-[1] h-6"></div>
-                            <p className="text-xl">{publishDate}</p> {/*Date that the project was published*/}
-                            <div className="bg-dominant w-[1] h-6"></div>
-                            <div className="flex gap-4">
-                                <p className="text-xl">Share: </p>
-                                <div className="flex gap-2"> {/*Links to share the project to social media*/}
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/LinkedIn.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
-                                    </Link>
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/Facebook.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
-                                    </Link>
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/X.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
-                                    </Link>
+                            {/*Author and publish details*/}
+                            <div className="flex items-center w-full gap-4 lg:gap-6 h-fit flex-wrap">
+                                <div className="w-12 h-12 aspect-square relative overflow-hidden rounded-full">
+                                    <Image alt="Author avatar" src="/Profile.png" fill className="object-contain"/> {/*Image of author: Static because it's only me publishing stuff*/}
+                                </div>
+                                <p className="text-base lg:text-xl grow-0">Marais Roos</p> {/*Name of author: Static because it's only me publishing stuff*/}
+                                <div className="bg-dominant w-[1] h-6"></div>
+                                <p className="text-base lg:text-xl">{publishDate}</p> {/*Date that the project was published*/}
+                                <div className="bg-dominant w-[1] h-6"></div>
+                                <div className="flex gap-4">
+                                    <p className="text-base lg:text-xl">Share: </p>
+                                    <div className="flex gap-2"> {/*Links to share the project to social media*/}
+                                        <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                            <Image src="/social_icons/LinkedIn.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                        </Link>
+                                        <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                            <Image src="/social_icons/Facebook.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                        </Link>
+                                        <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
+                                            <Image src="/social_icons/X.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
+                            {/*Project heading*/}
+                            <h1 className="font-black text-5xl md:text-6xl lg:text-7xl capitalize">{project.title}</h1> {/*Project title*/}
                         </div>
-                        {/*Project heading*/}
-                        <h1 className="font-black text-7xl capitalize">{project.title}</h1> {/*Project title*/}
+                        
                         {/*Content*/}
-                        <div className="flex gap-6">
+                        <div className="flex flex-col md:flex-row gap-6 -mt-50 px-6 lg:px-9">
                             {/*Main Content*/}
                             <div className="flex flex-col flex-2 gap-8">
                                 {/*Image container*/}
@@ -186,8 +191,8 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 <p className="text-lg font-normal">{project.description}</p>
                             </div>
                             {/*CTA*/}
-                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit">
-                                <h2 className="font-bold text-5xl">My latest portfolio</h2>
+                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit w-full ">
+                                <h2 className="text-4xl lg:text-5xl font-bold leading-[1.2em] text-left">My latest portfolio</h2>
                                 <Button variant="small" href="">I want the PDF</Button>
                                 <Button variant="outline" href="/projects">Take me there</Button>
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
@@ -198,7 +203,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         </div>
                         {/*Gallery of project images*/}
                         {project.galleryImages && project.galleryImages.length > 0 && (
-                            <div className="grid grid-cols-3 w-full gap-6">
+                            <div className="grid grid-cols 1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6 px-6 lg:px-9">
                                 {project.galleryImages.map((image, index) => (
                                     <div key={index} className="aspect-4/3 bg-background-secondary rounded-2xl relative overflow-hidden">
                                         <Image src={image.url} alt={image.alt} fill className="object-cover"/>
@@ -206,7 +211,6 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 ))}
                             </div>
                         )}
-                    </div>
                 </main>
                 <Footer/>
             </div>

@@ -53,7 +53,6 @@ export default function Button({ href, children, className = "", variant="primar
         rounded-2xl
         font-semibold
         transition-all
-        w-fit
         
 
         cursor-pointer
