@@ -22,13 +22,13 @@ export default function HeadingWithImage({
     const HeadingTag = level;
     
     return (
-        <HeadingTag className={`${tailwindClasses}`}>
-            <span className="mt-[0.5em]">{beforeText}</span>
+        <HeadingTag className={`${tailwindClasses} leading-[1.2]`}>
+            <span className="mt-[0.5em] inline">{beforeText}</span>
             {imageSrc && (
                 // This div acts as the wrapper to define the image dimensions
                 <div 
-                    className={`relative`}
-                    style={{ height: "2em", aspectRatio: aspectRatio }}
+                    className={`relative inline-block align-middle mx-2 mb-0.5`}
+                    style={{ height: "1.5em", aspectRatio: aspectRatio }}
                 >
                     <Image
                         src={imageSrc}
@@ -39,7 +39,7 @@ export default function HeadingWithImage({
                     />
                 </div>
             )}
-            <span className="mt-[0.5em]">{afterText}</span>
+            <span className="mt-[0.5em] inline">{afterText}</span>
         </HeadingTag>
     );
 }
