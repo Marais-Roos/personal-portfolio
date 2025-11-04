@@ -50,7 +50,7 @@ const FloatingField = ({
                     onBlur={() => setIsFocused(false)}  
                     required
                     className={`
-                        w-full p-4 rounded-xl border-2 transition-all duration-300 outline-none text-xl resize-none
+                        w-full p-4 rounded-xl border-2 transition-all duration-300 outline-none text-lg md:text-xl resize-none
                         ${borderStyle} 
                         text-dominant
                         ${bgStyle}
@@ -68,7 +68,7 @@ const FloatingField = ({
                     onBlur={() => setIsFocused(false)}
                     required
                     className={`
-                        w-full p-4 rounded-xl border-2 transition-all duration-300 outline-none text-xl
+                        w-full p-4 rounded-xl border-2 transition-all duration-300 outline-none text-lg md:text-xl 
                         ${borderStyle} 
                         text-dominant
                         ${bgStyle}
@@ -81,7 +81,7 @@ const FloatingField = ({
                 htmlFor={name} 
                 className={`
                     absolute left-4 transition-all duration-300 ease-in-out cursor-text select-none
-                    text-xl text-dominant pointer-events-none 
+                    text-lg md:text-xl text-dominant pointer-events-none 
                     
                     ${isActive 
                         ? '-top-3 text-base text-accent bg-background-secondary px-2 font-medium z-10' 
@@ -154,7 +154,7 @@ export default function ContactForm() {
     
 
     return (
-        <div className="bg-background-secondary p-9 rounded-2xl w-full flex flex-col gap-8 shadow-2xl shadow-black/10">
+        <div className="bg-background-secondary p-6 md:p-9 rounded-2xl w-full flex flex-col gap-6 md:gap-9 shadow-2xl shadow-black/10">
             
             {isSubmitted ? (
                 // SUCCESS VIEW
