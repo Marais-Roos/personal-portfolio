@@ -7,47 +7,70 @@ import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import Button from "@/components/Button";
 import ProjectCarousel from "@/components/ProjectCarousel";
+import Footer from "@/components/Footer";
+
+// Imports for Data Types and Utilities
 import { Project, Service } from "@/data/types";
 import { 
   createServiceLookupMap, 
   filterProjectsForService 
 } from "@/utils/data-utils";
 
-// NEW IMPORTS: Supabase client and mapping types
-import { createClient } from '@/utils/supabase/client';
-import { 
-    SupabaseService, 
-    SupabaseProject, 
-    mapSupabaseService, 
-    mapSupabaseProject 
-} from '@/data/supabase-types'; 
-import Footer from "@/components/Footer";
+// [NEW IMPORTS] Import Sanity Client, Mappers, and Types
+import { getSanityClient } from '@/sanity/lib/client';
+// FIX: Changed mapSanityProject to mapSanityProjectToDetailData
+import { mapSanityService, mapSanityProjectToDetailData, SanityService, SanityProject } from '@/data/sanity-types'; 
 
 
-// --- ASYNC DATA FETCHING FUNCTION ---
-async function fetchAllPortfolioData(): Promise<{ services: Service[], projects: Project[] }> {
-    const supabase = createClient();
+// --- GROQ QUERIES (Sanity's Query Language) ---
+
+// 1. Query to fetch all Services, ordered by index.
+const ALL_SERVICES_QUERY = `
+  *[_type == "service"] | order(index asc) {
+    title,
+    "slug": slug.current, // <-- FIX: Projecting slug.current as a string
+    index,
+    longDescription,
+    shortDescription,
+    iconInactive, 
+    iconActive,
+    sectionLink,
+  }
+`;
+
+// 2. Query to fetch all Projects, including resolved service slugs/titles.
+const ALL_PROJECTS_QUERY = `
+  *[_type == "project"] {
+    title,
+    "slug": slug.current,
+    description,
     
-    // 1. Fetch Services
-    const { data: rawServices } = await supabase
-        .from('Services') // Using correct case-sensitive name
-        .select('*')
-        .order('index', { ascending: true }) 
-        .returns<SupabaseService[]>(); 
+    // Fetch raw image for the utility
+    mainImage {
+        "asset": asset,
+        altText
+    },
+    
+    "publishedAt": _createdAt,
+    
+    // FIX: Project 'slug.current' specifically so it returns a string, not an object
+    "serviceDetails": serviceSlugs[]->{ "slug": slug.current, title }
+  }
+`;
 
-    const services = rawServices ? rawServices.map(mapSupabaseService) : [];
+// --- NEW ASYNC DATA FETCHING FUNCTION (using Sanity) ---
+async function fetchAllPortfolioData(): Promise<{ services: Service[], projects: Project[] }> {
+    // 1. Initialize the Sanity client
+    const client = getSanityClient();
+    
+    // 2. Fetch Services
+    const rawServices = await client.fetch<SanityService[]>(ALL_SERVICES_QUERY);
+    const services = rawServices ? rawServices.map(mapSanityService) : [];
 
-    // 2. Fetch all Projects
-    const { data: rawProjects, error: projectsError } = await supabase
-        .from('Projects') // Using correct case-sensitive name
-        // FIX: Request all columns ('*') and alias 'created_at' as 'date'
-        .select('*, created_at') 
-        .returns<SupabaseProject[]>();
-
-    if (projectsError) {
-        console.error("Error fetching projects:", projectsError);
-    }
-    const projects = rawProjects ? rawProjects.map(mapSupabaseProject) : [];
+    // 3. Fetch Projects
+    const rawProjects = await client.fetch<SanityProject[]>(ALL_PROJECTS_QUERY);
+    // FIX: Using the corrected mapper function
+    const projects = rawProjects ? rawProjects.map(mapSanityProjectToDetailData) : [];
     
     return { services, projects };
 }
@@ -82,39 +105,34 @@ export default async function Projects() {
 
     return (
         <div className="bg-background-primary min-h-screen">
-            <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
+            <div className="flex flex-col items-center mx-auto py-4 px-18 ">
                 {/* The Navbar component */}
-                <div className="sticky top-6 w-full flex justify-center z-10">
-                    <Navbar/>
-                </div>
-                <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">
-                    {/*Hero Section Container*/}
-                    <div className="flex flex-col items-center p-6 lg:p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_1.png)]">
-                        {/*Hero Section Top*/}
-                        <div className="flex flex-col md:flex-row items-center w-full gap-6 max-w-full">
-                            <div className="max-w-full flex-1 relative w-full aspect-3/4">
+                <Navbar />
+                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
+                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
+                        <div className="flex items-center w-full gap-6 max-w-full">
+                            <div className="max-w-full flex-1 relative h-full aspect-3/4">
                                 <Image src="/Projects Hero.png" alt="Marais Roos" fill className="object-contain"/>
-                            </div>
-                            <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative md:items-start items-center">
-                                <h1 className="text-center md:text-left text-5xl md:text-6xl lg:text-7xl font-black text-dominant relative overflow-hidden w-full">My Greatest Hits</h1>
-                                <p className="text-xl lg:text-3xl text-center md:text-left">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
-                            
-                                <Button href="/portfolio/Portfolio Large.pdf" target="_blank" variant="primary">Download the PDF</Button>
-                            
+                        </div>
+                            <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative align-left items-center">
+                                <h1 className="text-7xl text-dominant font-black">My Greatest Hits</h1>
+                                <p className="text-3xl">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
+                                <div className="w-full flex flex-row items-left">
+                                    <Button href="" variant="primary">Download the PDF version</Button>
+                                </div>
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
-                                    <p className="text-xs text-center md:text-left"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
-                                    <p className="italic text-[10px] text-center md:text-left"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
+                                    <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
+                                    <p className="italic text-[10px]"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
                                 </div>
                             </div>
                         </div>
-                        {/*Hero Section Bottom*/}
                         <div className="flex flex-col w-full max-w-full gap-4 items-center">
-                            <h2 className="text-left font-medium">Some of the tools in my shed:</h2>
-                            <div className="flex gap-6 justify-center items-center w-full flex-wrap md:gap-9">
+                            <h2 className="text-l font-medium">Some of the tools in my shed:</h2>
+                            <div className="flex gap-9 justify-center items-center w-full h-7">
                                 {toolLogos.map((logo) => (
-                                <div key={logo.src} className="h-7 w-20 relative shrink-0">
-                                    <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
-                                </div>
+                                    <div key={logo.src} className="h-7 w-20 relative shrink-0">
+                                        <Image src={logo.src} alt={logo.alt} fill className="object-cover"/>
+                                    </div>
                                 ))}
                             </div>
                         </div>
@@ -126,7 +144,7 @@ export default async function Projects() {
                             const serviceProjects = getRelevantProjects(service.slug);
                         
                             return (
-                                <div id={service.sectionLink} key={service.slug} className="w-full flex flex-col gap-12 scroll-mt-36">
+                                <div key={service.slug} className="flex flex-col gap-8">
                                     <ProjectCarousel
                                         service={service} // Pass the full service object (has longDescription and title)
                                         projects={serviceProjects} // Pass the filtered array of projects
@@ -136,7 +154,12 @@ export default async function Projects() {
                             );
                         })}
                     </div>
-                    
+                    {/*Call To Action Section*/}
+                    <div className="flex flex-col items-center p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10">
+                        <CTASection/>
+                    </div>
+                    {/* Assuming Footer component is available */}
+                    {/* <Footer /> */}
                 </main>
                 <Footer/>
             </div>
