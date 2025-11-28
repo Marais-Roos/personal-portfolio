@@ -99,7 +99,7 @@ export default async function Projects() {
                                 <h1 className="text-center md:text-left text-5xl md:text-6xl lg:text-7xl font-black text-dominant relative overflow-hidden w-full">My Greatest Hits</h1>
                                 <p className="text-xl lg:text-3xl text-center md:text-left">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
                             
-                                <Button href="" variant="primary">Download the PDF</Button>
+                                <Button href="/portfolio/Portfolio Large.pdf" target="_blank" variant="primary">Download the PDF</Button>
                             
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
                                     <p className="text-xs text-center md:text-left"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>

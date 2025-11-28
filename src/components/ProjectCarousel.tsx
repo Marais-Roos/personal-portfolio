@@ -74,7 +74,7 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
                             [&::-webkit-scrollbar]:h-0
                             [-ms-overflow-style]:none
                             [scrollbar-width]:none
-                            relative z-20"   
+                            relative z-1"   
                 >
                     {projects.map((project) =>
                         <div key={project.slug} className="snap-start">

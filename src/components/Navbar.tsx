@@ -40,11 +40,11 @@ export default function Navbar() {
     return (
         // Outer div to manage the full width container (Phone) vs max-width container (Tablet)
         // We use lg: to center on the desktop view when max-w is applied
-        <div className="w-full lg:max-w-[1056px] flex justify-center lg:justify-start">
+        <div className="z-50 w-full lg:max-w-[1056px] flex justify-center lg:justify-start">
             <nav
                 // The main container. Max width is set here for md, but full width for mobile.
                 className={`
-                    sticky top-6 z-10 flex items-center justify-between bg-background-secondary rounded-xl shadow-2xl shadow-black/10 transition-all
+                    sticky top-6 z-50 flex items-center justify-between bg-background-secondary rounded-xl shadow-2xl shadow-black/10 transition-all
 
                     /* MOBILE (Below 768px - Phone) */
                     w-full max-w-full p-4

@@ -38,10 +38,10 @@ export default function Footer(){
                     </div>
                     <div className="flex flex-col gap-4 flex-1">
                         <p className="text-xl font-semibold text-center md:text-left">What I Do</p>
-                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/">Web Design & Development</Link>
-                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/">Graphic Design</Link>
-                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/">Automation</Link>
-                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/">Brand Design</Link>
+                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/projects#web-design-development">Web Design & Development</Link>
+                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/projects#graphic-design">Graphic Design</Link>
+                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/projects#back-end-automation">Automation</Link>
+                        <Link className="text-lg font-normal hover:text-accent text-center md:text-left" href="/projects#brand-design">Brand Design</Link>
                     </div>
                 </div>
             </div>

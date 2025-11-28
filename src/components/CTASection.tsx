@@ -30,7 +30,7 @@ export default function CTASection() {
       <div className="flex flex-col flex-1 gap-5">
         <p className="text-lg md:text-xl text-center md:text-left">Get an in-depth look at the work I do, and how I turn creative ideas into concrete digital assets.</p>
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6">
-          <Button href="/contact" variant="small">I want the PDF</Button>
+          <Button href="/portfolio/Portfolio Large.pdf" target='_blank' variant="small">I want the PDF</Button>
           <Button href="/projects" variant="outline">Take me there</Button>
         </div>
       </div>

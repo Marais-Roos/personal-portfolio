@@ -12,6 +12,7 @@ interface ButtonProps {
     type?: 'submit'| 'button' | 'reset';
     disabled?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>;
+    target?: '_blank';
 }
 
 const getVariantClasses = (variant: ButtonVariant = 'primary') => {
@@ -40,7 +41,7 @@ const getVariantClasses = (variant: ButtonVariant = 'primary') => {
     }
 };
 
-export default function Button({ href, children, className = "", variant="primary", type, disabled, onClick }: ButtonProps) {
+export default function Button({ href, children, className = "", variant="primary", type, disabled, onClick, target }: ButtonProps) {
     const variantClasses = getVariantClasses(variant);
 
     const classes = `
@@ -84,6 +85,7 @@ export default function Button({ href, children, className = "", variant="primar
             href={href || "#"} // Fallback to avoid TS error if href is missing, though it shouldn't be here
             className={classes}
             onClick={onClick}
+            target={target}
         >
             {children}
         </Link>

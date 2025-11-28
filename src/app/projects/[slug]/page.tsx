@@ -193,7 +193,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                             {/*CTA*/}
                             <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit w-full ">
                                 <h2 className="text-4xl lg:text-5xl font-bold leading-[1.2em] text-left">My latest portfolio</h2>
-                                <Button variant="small" href="">I want the PDF</Button>
+                                <Button variant="small" target='_blank' href="/portfolio/Portfolio Large.pdf">I want the PDF</Button>
                                 <Button variant="outline" href="/projects">Take me there</Button>
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
                                     <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
