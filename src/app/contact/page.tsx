@@ -64,7 +64,7 @@ export default function Contact() {
                                 <Mail size={48} className='text-accent'/>
                                 <h2 className='text-3xl font-medium'>Email</h2>
                                 <p className='font-lg text-left'>Get in touch with a good old fashioned email.</p>
-                                <LinkArrow href="mailto:hello@maraisroos.site">Send me an email</LinkArrow>
+                                <LinkArrow href="mailto:hello@maraisroos.co.za">Send me an email</LinkArrow>
                             </div>
                             <div className='flex flex-col gap-4 items-start'>
                                 <Phone size={48} className='text-accent'/>
