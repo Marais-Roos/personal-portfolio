@@ -202,53 +202,52 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
 
     return(
         <div className="bg-background-primary min-h-screen">
-            <div className="flex flex-col items-center mx-auto py-4 px-18 ">
+            <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
                 <Navbar />
-                <main className="flex flex-col items-center justify-start grow w-full max-w-[1056px] gap-24 pt-25">
+                <main className="flex flex-col items-center justify-start grow w-full max-w-[calc(100vw-48px)] lg:max-w-[1056px] md:max-w-[738px] gap-24">
                     {/* Background visual element */}
-                    <div className="bg-background-secondary w-full rounded-2xl shadow-black/10 bg-[url(/background_1.png)] bg-center h-[500] absolute max-w-[1056] z-0"></div>
+                    <div className="mt-24 md:mt-32 lg:mt-40 bg-background-secondary w-full rounded-2xl shadow-black/10 bg-[url(/background_1.png)] bg-center h-[720] md:h-[500]  absolute max-w-[calc(100vw-48px)] lg:max-w-[1056px] md:max-w-[738px] z-0"></div>
                     
-                    <div className="flex flex-col items-left p-9 gap-8 relative z-1">
+                    <div className="mt-24 md:mt-32 lg:mt-40 flex flex-col items-start p-6 lg:p-9 gap-6  relative z-1 max-w-[calc(100vw-48px)] lg:max-w-[1056px] md:max-w-[738px]">
                         {/*Project and project type*/}
-                        <div className="flex gap-6">
+                        <div className="flex flex-wrap gap-4 md:gap-6">
                             <div className="px-4 py-2 bg-accent rounded-full">
-                                {/* Tailwind class explanation: uppercase makes text uppercase, text-xl sets size, tracking-wider increases letter spacing. */}
-                                <p className="uppercase text-xl tracking-wider font-medium text-background-primary">Projects</p>
+                                <p className="uppercase text-lg lg:text-xl tracking-wider font-medium text-background-primary">Projects</p>
                             </div>
                             {/* Linked projects are displayed here */}
                             {project.serviceSlugs.map((slug) => {
-                            // 1. Look up the full service object using the slug
-                            const service = serviceLookupMap[slug];
+                                // 1. Look up the full service object using the slug
+                                const service = serviceLookupMap[slug];
 
-                            // Safety check: if we can't find the service, skip it
-                            if (!service) return null;
+                                // Safety check: if we can't find the service, skip it
+                                if (!service) return null;
 
-                            return (
-                                <Link 
-                                    key={slug} 
-                                    className="px-4 py-2 border-2 border-accent rounded-full hover:bg-background-secondary hover:text-dominant transition-colors" 
-                                    href={`/projects#${service.slug}`} // See note below about this URL!
-                                >
-                                    <p className="uppercase text-xl tracking-wider font-medium text-accent">
-                                        {service.title}
-                                    </p> 
-                                </Link>
-                            );
-                        })}
+                                return (
+                                    <Link 
+                                        key={slug} 
+                                        className="px-4 py-2 border-2 border-accent rounded-full hover:bg-background-secondary text-accent hover:text-dominant hover:border-dominant transition-colors" 
+                                        href={`/projects#${service.slug}`}
+                                    >
+                                        <p className="uppercase text-lg lg:text-xl tracking-wider font-medium">
+                                            {service.title}
+                                        </p> 
+                                    </Link>
+                                );
+                            })}
                         </div>
                         
                         {/*Author and publish details*/}
-                        <div className="flex items-center w-full gap-6 h-fit">
-                            <div className="w-12 h-12 aspect-square relative">
-                                <Image alt="Author avatar" src="/Avatar.png" fill className="object-contain"/> 
+                        <div className="flex flex-wrap items-center w-full md:gap-6 gap-4 h-fit">
+                            <div className="w-9 h-9 md:w-12 md:h-12 aspect-square relative rounded-full overflow-hidden">
+                                <Image alt="Author avatar" src="/Profile.png" fill className="object-contain"/> 
                             </div>
-                            <p className="text-2xl grow-0">Marais Roos</p> 
+                            <p className="text-xl lg:text-2xl grow-0">Marais Roos</p> 
                             {/* Divider: w-[1] sets 1px width, h-6 sets 1.5rem height. */}
                             <div className="bg-dominant w-[1] h-6"></div> 
-                            <p className="text-2xl">{publishDate}</p> 
+                            <p className="text-xl lg:text-2xl">{publishDate}</p> 
                             <div className="bg-dominant w-[1] h-6"></div>
                             <div className="flex gap-4">
-                                <p className="text-2xl">Share: </p>
+                                <p className="text-xl lg:text-2xl">Share: </p>
                                 {/* Social share links - bg-background-primary for circle background, hover:border for visual feedback. */}
                                 <div className="flex gap-2"> 
                                     <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href={socialLinks.linkedin} target='_blank' rel='noopener noreferrer'>
@@ -265,14 +264,14 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         </div>
                         
                         {/*Project heading*/}
-                        <h1 className="font-black text-7xl capitalize">{project.title}</h1> 
+                        <h1 className="font-black text-6xl md:text-7xl capitalize">{project.title}</h1> 
                         
                         {/*Content*/}
-                        <div className="flex gap-6">
+                        <div className="flex flex-col md:flex-row gap-6">
                             {/*Main Content*/}
                             <div className="flex flex-col flex-2 gap-8">
                                 {/*Image container*/}
-                                <div className="w-full aspect-2/1 relative bg-dominant rounded-2xl overflow-hidden"> 
+                                <div className="w-full aspect-4/3 relative bg-dominant rounded-2xl overflow-hidden"> 
                                     <Image src={project.mainImage} fill alt={project.altText || project.title} className="object-cover"/> 
                                 </div>
                                 
@@ -295,7 +294,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         
                         {/*Gallery of project images*/}
                         {project.galleryImages && project.galleryImages.length > 0 && (
-                            <div className="grid grid-cols-3 w-full gap-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full gap-6">
                                 {project.galleryImages.map((image, index) => (
                                     <div key={index} className="aspect-4/3 bg-background-secondary rounded-2xl relative overflow-hidden">
                                         <Image src={image.url} alt={image.alt} fill className="object-cover"/>

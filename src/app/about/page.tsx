@@ -43,14 +43,12 @@ export default function About() {
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 lg:px-18 md:px-9 px-6">
                 {/* The Navbar component */}
-                <div className="sticky top-6 w-full flex justify-center z-10">
-                    <Navbar/>
-                </div>
+                <Navbar/>
         
                 {/* Semantic main content area for the Hero Section and other page content */}
-                <main className="flex flex-col items-center justify-start grow w-full lg:max-w-[1056px] lg:gap-24 lg:pt-25 pt-12 md:max-w-[738px] md:gap-18 md:pt-20 gap-20 max-w-full">
+                <main className="flex flex-col items-center justify-start grow w-full max-w-[calc(100vw-48px)] lg:max-w-[1056px] md:max-w-[738px] gap-24">
                     {/*Hero Section Container*/}
-                    <div className="flex flex-col items-center p-6 md:p-9 bg-background-secondary w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_2.png)] bg-center"> 
+                    <div className="mt-24 md:mt-32 lg:mt-40 flex flex-col items-center p-6 lg:p-9 bg-background-secondary w-full max-w-full rounded-2xl gap-12 shadow-2xl shadow-black/10 bg-[url(/background_2.png)] bg-center"> 
                         <HeadingWithImage
                             level="h1" // **The dynamic tag you needed!**
                             beforeText="Hey there, I'm Marais"
