@@ -4,7 +4,6 @@ import ProjectCard from "./ProjectCard";
 import { Project, Service } from "@/data/types";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import React, { useRef } from "react";
-import LinkArrow from "./LinkArrow";
 
 interface ProjectCarouselProps {
     projects: Project[];
@@ -36,10 +35,10 @@ export default function ProjectCarousel({ projects, service, serviceLookupMap }:
     if (projects.length === 0) return null;
 
     // Destructure properties from the service object for clean reading
-    const { title, longDescription } = service;
+    const { title, longDescription, slug } = service;
 
     return (
-        <div className="flex flex-col gap-8 w-full overflow-visible">
+        <div id={slug} className="flex flex-col gap-8 w-full overflow-visible">
             {/* Header and Controls */}
             <div className="flex flex-col md:flex-row items-start md:items-end gap-8 md:gap-18">
                 {/* Left: Title and Description */}

@@ -28,6 +28,7 @@ import {
     createServiceLookupMap,
     getServiceTitlesFromSlugs 
 } from '@/utils/data-utils'; 
+import service from "@/sanity/schemaTypes/service";
 
 export const revalidate = 3600;
 
@@ -215,11 +216,25 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 <p className="uppercase text-xl tracking-wider font-medium text-background-primary">Projects</p>
                             </div>
                             {/* Linked projects are displayed here */}
-                            {serviceTitles.map((title) => (
-                                <div key={title} className="px-4 py-2 border-2 border-accent rounded-full">
-                                    <p className="uppercase text-xl tracking-wider font-medium text-accent">{title}</p> 
-                                </div>
-                            ))}
+                            {project.serviceSlugs.map((slug) => {
+                            // 1. Look up the full service object using the slug
+                            const service = serviceLookupMap[slug];
+
+                            // Safety check: if we can't find the service, skip it
+                            if (!service) return null;
+
+                            return (
+                                <Link 
+                                    key={slug} 
+                                    className="px-4 py-2 border-2 border-accent rounded-full hover:bg-background-secondary hover:text-dominant transition-colors" 
+                                    href={`/projects#${service.slug}`} // See note below about this URL!
+                                >
+                                    <p className="uppercase text-xl tracking-wider font-medium text-accent">
+                                        {service.title}
+                                    </p> 
+                                </Link>
+                            );
+                        })}
                         </div>
                         
                         {/*Author and publish details*/}

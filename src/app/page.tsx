@@ -8,6 +8,7 @@ import LinkArrow from "@/components/LinkArrow";
 import CTASection from "@/components/CTASection";
 import ServiceCard from "@/components/ServiceCard";
 import ProjectCarousel from "@/components/ProjectCarousel";
+import Footer from "@/components/Footer";
 
 // Imports for Data Types and Utilities
 import { Project, Service } from "@/data/types"; 
@@ -196,6 +197,7 @@ export default async function Home() {
             {/*Footer*/}
             {/* <Footer/> */}
             </main>
+            <Footer/>
         </div>
         </div>
     );
