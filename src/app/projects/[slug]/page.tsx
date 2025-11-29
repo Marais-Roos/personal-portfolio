@@ -78,7 +78,7 @@ const ALL_PROJECT_SLUGS_QUERY = `
 const ALL_SERVICES_QUERY = `
   *[_type == "service"] | order(index asc) {
     title,
-    slug,
+    "slug": slug.current,
     index,
     shortDescription,
     longDescription,
@@ -189,6 +189,16 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
     const publishDate = new Date(project.created_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const serviceTitles = getServiceTitlesFromSlugs(project.serviceSlugs, serviceLookupMap);
 
+    const baseUrl = 'https://www.maraisroos.co.za';
+    const shareUrl = `${baseUrl}/projects/${project.slug}`;
+    const shareText = `Check out this project by Marais Roos: ${project.title}`;
+
+    const socialLinks = {
+        linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`,
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+        twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
+    }
+
     return(
         <div className="bg-background-primary min-h-screen">
             <div className="flex flex-col items-center mx-auto py-4 px-18 ">
@@ -226,14 +236,14 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 <p className="text-2xl">Share: </p>
                                 {/* Social share links - bg-background-primary for circle background, hover:border for visual feedback. */}
                                 <div className="flex gap-2"> 
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/LinkedIn.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href={socialLinks.linkedin} target='_blank' rel='noopener noreferrer'>
+                                        <Image src="/social_icons/LinkedIn.svg" alt="Share on LinkedIn" width={16} height={16} className="object-contain"/>
                                     </Link>
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/Facebook.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href={socialLinks.facebook} target='_blank' rel='noopener noreferrer'>
+                                        <Image src="/social_icons/Facebook.svg" alt="Share on Facebook" width={16} height={16} className="object-contain"/>
                                     </Link>
-                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href="">
-                                        <Image src="/social_icons/X.svg" alt="Instagram logo" width={16} height={16} className="object-contain"/>
+                                    <Link className="bg-background-primary rounded-full w-8 h-8  relative aspect-square flex items-center justify-center hover:border hover:border-dominant" href={socialLinks.twitter} target='_blank' rel='noopener noreferrer'>
+                                        <Image src="/social_icons/X.svg" alt="Share on X (Twitter)" width={16} height={16} className="object-contain"/>
                                     </Link>
                                 </div>
                             </div>
