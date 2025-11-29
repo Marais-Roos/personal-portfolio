@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google"; //Import Poppins font from Google fonts
 import "./globals.css";
 
-import Navbar from "@/components/Navbar";
+
 
 //Define new Poppins font with specific weights and subsets
 const poppins = Poppins({
@@ -16,9 +16,36 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Marais Roos | Personal Portfolio",
-  description:
-    "Welcome to my personal portfolio! I'm Marais Roos, a passionate developer specializing in creating dynamic and responsive web applications. Explore my projects, skills, and experience as you navigate through my portfolio."
+  metadataBase: new URL('https://www.maraisroos.co.za'),
+
+  title : {
+    default: "Marais Roos | Personal Portfolio",
+    template: "%s | Marais Roos",
+  },
+
+  openGraph: {
+    title: "Marais Roos | Personal Portfolio",
+    description: "I'm Marais. I once studied engineering, now I build clean, functional websites. No fake teams, no empty promises—just code, creativity, and a little bit of chaos.",
+    url: "https://www.maraisroos.co.za",
+    siteName: "Marais Roos Portfolio",
+    locale: "en_ZA",
+    type: "website",
+    images: [
+      {
+        url: '/opengraph_images/Home.png',
+        width: 1200,
+        height: 630,
+        alt: "Marais Roos Portfolio Cover",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Marais Roos | Personal Portfolio",
+    description: "I'm Marais. I once studied engineering, now I build clean, functional websites. No fake teams, no empty promises—just code, creativity, and a little bit of chaos.",
+    images: ["/opengraph_images/Home.png"],
+  }
 };
 
 export default function RootLayout({

@@ -6,6 +6,36 @@ import CTASection from "@/components/CTASection";
 import Image from "next/image";
 import DateBlock from "@/components/DateBlock";
 import TimelineContent from "@/components/TimelineContent";
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title : "About Me | The Guy Behind the Screen - Marais Roos",
+  description: "From electronic engineering to financial advising, and finally to web design. Read the slightly chaotic backstory of how I found my way to code (and why I'm still here).",
+
+  openGraph: {
+    title: "About Me | The Guy Behind the Screen - Marais Roos",
+    description: "From electronic engineering to financial advising, and finally to web design. Read the slightly chaotic backstory of how I found my way to code (and why I'm still here).",
+    url: "https://www.maraisroos.co.za/about",
+    siteName: "Marais Roos Portfolio",
+    locale: "en_ZA",
+    type: "website",
+    images: [
+      {
+        url: '/opengraph_images/About.png',
+        width: 1200,
+        height: 630,
+        alt: "Marais Roos Portfolio Cover",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "About Me | The Guy Behind the Screen - Marais Roos",
+    description: "From electronic engineering to financial advising, and finally to web design. Read the slightly chaotic backstory of how I found my way to code (and why I'm still here).",
+    images: ["/opengraph_images/About.png"],
+  }
+};
 
 export default function About() {
 

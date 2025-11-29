@@ -20,7 +20,6 @@ import {
 import { getSanityClient } from '@/sanity/lib/client';
 import { mapSanityService, mapSanityProjectToDetailData, SanityService, SanityProject } from '@/data/sanity-types';
 
-
 // --- GROQ QUERIES (Sanity's Query Language) ---
 
 // 1. Query to fetch all Services, ordered by index.

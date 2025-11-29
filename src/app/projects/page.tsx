@@ -21,6 +21,36 @@ import { getSanityClient } from '@/sanity/lib/client';
 // FIX: Changed mapSanityProject to mapSanityProjectToDetailData
 import { mapSanityService, mapSanityProjectToDetailData, SanityService, SanityProject } from '@/data/sanity-types'; 
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title : "My Greatest Hits | Web Design Portfolio & Projects",
+  description: "A collection of works by a guy who spends way too much time at his desk. Browse my latest web design projects, from creative concepts to concrete digital assets.",
+
+  openGraph: {
+    title: "My Greatest Hits | Web Design Portfolio & Projects",
+    description: "A collection of works by a guy who spends way too much time at his desk. Browse my latest web design projects, from creative concepts to concrete digital assets.",
+    url: "https://www.maraisroos.co.za/projects",
+    siteName: "Marais Roos Portfolio",
+    locale: "en_ZA",
+    type: "website",
+    images: [
+      {
+        url: '/opengraph_images/Projects.png',
+        width: 1200,
+        height: 630,
+        alt: "Marais Roos Portfolio Cover",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "My Greatest Hits | Web Design Portfolio & Projects",
+    description: "A collection of works by a guy who spends way too much time at his desk. Browse my latest web design projects, from creative concepts to concrete digital assets.",
+    images: ["/opengraph_images/Projects.png"],
+  }
+};
 
 // --- GROQ QUERIES (Sanity's Query Language) ---
 
