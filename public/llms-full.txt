@@ -1,0 +1,46 @@
+# Marais Roos - Full Portfolio Context
+
+## Bio & Philosophy
+Marais Roos is a creative web designer and developer who transitioned from Electronic Engineering and Financial Advice into tech. He currently runs a one-man design studio focused on simplicity and functionality.
+
+His philosophy: "No fake teams, no empty promises—just code, creativity, and a little bit of chaos." He balances the structural discipline of engineering with creative design.
+
+## Educational Background
+- **2018:** Electronic Engineering at Tuks (University of Pretoria).
+- **2019-2021:** Information and Knowledge Systems (Focus on IT & Genetics).
+- **2022:** C++ Certification (Boston City Campus).
+- **Current:** Completing BSc Informatics at UNISA.
+
+## Professional Timeline
+- **2023:** Worked as a Financial Advisor. Learned client relations and long-term commitment.
+- **2024 - Present:** Established Roos Web Design.
+
+## Detailed Tech Stack & Tools
+
+### Design & Low Code
+- **Figma:** Primary tool for UI/UX design and prototyping.
+- **Webflow:** For high-fidelity visual development.
+- **Framer:** For interactive, design-centric sites.
+
+### Development (Code)
+- **Framework:** Next.js 15+ (App Router), React 19
+- **Styling:** Tailwind CSS
+- **CMS:** Sanity (Headless CMS)
+- **Animation:** Framer Motion, Lottie (lottie-web)
+- **Language:** TypeScript
+- **Icons:** Lucide React
+- **Forms/Email:** Resend API, Zod validation
+
+### Automation
+- **Zapier:** For connecting web forms to business logic and CRMs.
+
+## Core Services offered
+1. **Web Design & Development:** Custom coded or low-code solutions.
+2. **Graphic Design:** Visual identity and assets.
+3. **Brand Design:** Cohesive branding strategies.
+4. **Automation:** Back-end workflow automation using tools like Zapier.
+
+## Personal Trivia
+- **Location:** South Africa (Vaal Triangle / Pretoria roots).
+- **Interests:** Debugging code, "The Office", "Family Guy".
+- **Personality:** Describes himself as a "shy extrovert."

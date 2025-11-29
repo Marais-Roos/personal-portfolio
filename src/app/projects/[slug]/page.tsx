@@ -29,6 +29,7 @@ import {
     getServiceTitlesFromSlugs 
 } from '@/utils/data-utils'; 
 
+export const revalidate = 3600;
 
 // Define the structure for dynamic parameters passed to the page
 interface ProjectDetailPageProps {

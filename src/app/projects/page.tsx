@@ -23,6 +23,8 @@ import { mapSanityService, mapSanityProjectToDetailData, SanityService, SanityPr
 
 import { Metadata } from 'next';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title : "My Greatest Hits | Web Design Portfolio & Projects",
   description: "A collection of works by a guy who spends way too much time at his desk. Browse my latest web design projects, from creative concepts to concrete digital assets.",

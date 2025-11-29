@@ -1,0 +1,18 @@
+# Marais Roos - Web Design Portfolio
+
+> "I make clean, fast, low-BS websites for humans."
+
+## Summary
+Marais Roos is a web designer and developer based in South Africa. With a background in Electronic Engineering and Informatics, he runs a one-man studio bridging the gap between logic and creativity. He specializes in Next.js development and low-code solutions.
+
+## Quick Links
+- Portfolio: https://www.maraisroos.co.za/projects
+- About: https://www.maraisroos.co.za/about
+- Contact: https://www.maraisroos.co.za/contact
+
+## Tech Stack
+- **Code:** Next.js, React, Tailwind CSS, Sanity CMS
+- **Design & Low Code:** Figma, Webflow, Framer
+- **Automation:** Zapier, Resend
+
+[Link to Full Context]: https://www.maraisroos.co.za/llms-full.txt

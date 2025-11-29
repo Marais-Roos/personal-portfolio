@@ -20,6 +20,8 @@ import {
 import { getSanityClient } from '@/sanity/lib/client';
 import { mapSanityService, mapSanityProjectToDetailData, SanityService, SanityProject } from '@/data/sanity-types';
 
+export const revalidate = 3600;
+
 // --- GROQ QUERIES (Sanity's Query Language) ---
 
 // 1. Query to fetch all Services, ordered by index.
