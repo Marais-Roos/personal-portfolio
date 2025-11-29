@@ -1,13 +1,9 @@
 // next.config.ts
 import type { NextConfig } from "next";
 
-// --- Configuration for Sanity ---
-const sanityImageHostname = 'cdn.sanity.io'; // Standard Sanity image CDN
-// --- End Configuration ---
-
+const sanityImageHostname = 'cdn.sanity.io';
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactCompiler: true,
 
   images: {
@@ -20,12 +16,38 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'cdn.prod.website-files.com',
       },
-      // NEW: Sanity Image CDN
       {
         protocol: 'https',
         hostname: sanityImageHostname, 
       },
     ],
+  },
+
+  // Security Headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY', // Prevent clickjacking
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff', // Prevent MIME sniffing
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()',
+          },
+        ],
+      },
+    ];
   },
 };
 

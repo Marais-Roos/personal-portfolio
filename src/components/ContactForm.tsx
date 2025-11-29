@@ -1,18 +1,16 @@
 'use client';
 
-import React, { useState, useActionState } from 'react';
-// Import the server action we created
+import React, { useState, useActionState, useEffect, useRef } from 'react';
 import { submitContactForm } from '@/app/actions';
 import { Loader2 } from 'lucide-react';
 
-// Define the shape of the form data
 interface FormData {
     name: string;
     email: string;
     message: string;
 }
 
-// FLOATING FIELD COMPONENT - Remains unchanged
+// FLOATING FIELD COMPONENT
 const FloatingField = ({ 
     label, 
     name, 
@@ -92,26 +90,41 @@ const FloatingField = ({
     );
 };
 
-// --- CONTACT FORM MAIN COMPONENT ---
+// --- MAIN CONTACT FORM COMPONENT ---
 export default function ContactForm() {
     
-    // We keep local state for the inputs to drive the "Floating Label" UI animations
+    // Form state for UI
     const [formData, setFormData] = useState<FormData>({
         name: '',
         email: '',
         message: '',
     });
 
-    // useActionState handles the form submission lifecycle (loading, success, errors)
+    // Track when the form was loaded (for submission time calculation)
+    const formLoadTime = useRef<number>(Date.now());
+    
+    // Honeypot field (hidden from users, bots will fill it)
+    const [honeypot, setHoneypot] = useState('');
+
+    // useActionState for form submission
     const [state, formAction, isPending] = useActionState(submitContactForm, {
         success: false,
         message: '',
     });
 
-    // Update local state for UI effects (Floating Fields)
+    // Update local state for UI effects
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
+
+    // Reset form on successful submission
+    useEffect(() => {
+        if (state.success) {
+            setFormData({ name: '', email: '', message: '' });
+            setHoneypot('');
+            formLoadTime.current = Date.now(); // Reset timer
+        }
+    }, [state.success]);
 
     return (
         <div className="bg-background-secondary p-6 md:p-9 rounded-2xl w-full flex flex-col gap-6 md:gap-9 shadow-2xl shadow-black/10">
@@ -123,9 +136,8 @@ export default function ContactForm() {
                     <p className="text-2xl text-dominant max-w-md">Your message has been sent successfully. I'll get back to you as soon as I can.</p>
                 </div>
             ) : (
-                // FORM VIEW
                 <>
-                    {/* Display Error Message from Server Action */}
+                    {/* Display Error/Success Message */}
                     {state.message && !state.success && (
                         <p className="text-lg font-semibold text-red-600 p-3 bg-red-100 border border-red-300 rounded-lg">
                             {state.message}
@@ -154,8 +166,26 @@ export default function ContactForm() {
                             onChange={handleChange}
                         />
 
+                        {/* HONEYPOT FIELD - Hidden from users, catches bots */}
+                        <input
+                            type="text"
+                            name="website"
+                            value={honeypot}
+                            onChange={(e) => setHoneypot(e.target.value)}
+                            tabIndex={-1}
+                            autoComplete="off"
+                            className="absolute opacity-0 pointer-events-none"
+                            aria-hidden="true"
+                        />
+
+                        {/* Hidden field for submission time tracking */}
+                        <input 
+                            type="hidden" 
+                            name="formLoadTime" 
+                            value={formLoadTime.current} 
+                        />
+
                         <div className="w-fit">
-                            {/* Replaced 'Button' component with a real submit button to ensure form works */}
                             <button 
                                 type="submit" 
                                 disabled={isPending}
