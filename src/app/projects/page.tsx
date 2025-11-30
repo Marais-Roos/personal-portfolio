@@ -8,6 +8,7 @@ import Image from "next/image";
 import Button from "@/components/Button";
 import ProjectCarousel from "@/components/ProjectCarousel";
 import Footer from "@/components/Footer";
+import PortfolioCTA from "@/components/PortfolioCTA";
 
 // Imports for Data Types and Utilities
 import { Project, Service } from "@/data/types";
@@ -149,13 +150,14 @@ export default async function Projects() {
                             <div className="flex flex-col gap-5 w-full max-w-full flex-1 relative align-left items-center">
                                 <h1 className="lg:text-7xl text-6xl text-dominant font-black text-center md:text-left">My Greatest Hits</h1>
                                 <p className="text-2xl lg:text-3xl text-center md:text-left">A collection of works by a guy who spends way too much time at his desk while neglecting his chores.</p>
-                                <div className="w-full flex flex-row items-left">
-                                    <Button href="" variant="primary">Download the PDF version</Button>
+                                <div className="p-4 bg-background-primary/70 w-full rounded-2xl border-background-primary/50 flex flex-col gap-4">
+                                    <PortfolioCTA source={`/project`} variant="compact" />
+                                    <div className="flex flex-col items-center md:items-start justify-start w-full gap-2">
+                                        <p className="text-xs text-center md:text-left"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
+                                        <p className="italic text-[10px] text-center md:text-left"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
+                                    </div>
                                 </div>
-                                <div className="flex flex-col items-center md:items-start justify-start w-full gap-2">
-                                    <p className="text-xs text-center md:text-left"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
-                                    <p className="italic text-[10px] text-center md:text-left"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
-                                </div>
+                                
                             </div>
                         </div>
                         <div className="flex flex-col w-full max-w-full gap-4 items-center">
@@ -169,6 +171,7 @@ export default async function Projects() {
                             </div>
                         </div>
                     </div>
+
                     {/*Projects Section*/}
                     <div className="w-full flex flex-col gap-24">
                         {/* Iterate over each Service Category that has projects */}

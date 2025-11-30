@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Button from "@/components/Button";
 import PortableText from "@/components/PortableText"; // NEW: For rendering rich text
+import PortfolioCTA from '@/components/PortfolioCTA';
 
 {/*Imports for CMS functionality*/}
 import { Metadata } from 'next';
@@ -267,7 +268,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                         <h1 className="font-black text-6xl md:text-7xl capitalize">{project.title}</h1> 
                         
                         {/*Content*/}
-                        <div className="flex flex-col md:flex-row gap-6">
+                        <div className="flex flex-col md:flex-row gap-6 items-start max-w-full">
                             {/*Main Content*/}
                             <div className="flex flex-col flex-2 gap-8">
                                 {/*Image container*/}
@@ -281,10 +282,13 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 </div>
                             </div>
                             {/*CTA*/}
-                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit">
-                                <h2 className="font-bold text-5xl">My latest portfolio</h2>
-                                <Button variant="small" href="">I want the PDF</Button>
-                                <Button variant="outline" href="">Take me there</Button>
+                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit sticky top-24 min-w-0 max-w-full">
+                                <h2 className="font-bold text-4xl lg:text-5xl">Curious for more?</h2>
+                                <p className="text-base lg:text-lg">I can email you my full portfolio PDF. It includes the technical breakdowns and nitty-gritty details that I left out to save space here.</p>
+                                <PortfolioCTA source={`project-${project.slug}`} variant="compact" />
+                                <div className="border-t-2 border-background-secondary pt-4 flex flex-col gap-3">
+                                    <Button variant="outline" href="/projects">View All Projects</Button>
+                                </div>
                                 <div className="flex flex-col items-left justify-start w-full gap-2">
                                     <p className="text-xs"><span className="font-base font-bold">100% </span>of people I met said it was a pleasure meeting me - after a single conversation.</p>
                                     <p className="italic text-[10px]"><span className="font-bold">Source: </span>Networking event. Probably just being polite.</p>
