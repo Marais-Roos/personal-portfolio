@@ -26,9 +26,24 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      // Using a rich text field (Portable Text) for rich content in Sanity
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [
+        // Allow standard text blocks
+        { type: 'block' },
+        // NEW: Allow images directly inside the text
+        { 
+          type: 'image', 
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+              description: 'Important for SEO and accessiblity.',
+            }
+          ]
+        }
+      ],
       description: 'The main, detailed description for the project page.',
     }),
     defineField({
