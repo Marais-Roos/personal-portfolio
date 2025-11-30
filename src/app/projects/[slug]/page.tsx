@@ -282,7 +282,7 @@ export default async function ProjectDetail({ params }: ProjectDetailPageProps) 
                                 </div>
                             </div>
                             {/*CTA*/}
-                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit sticky top-24 min-w-0 max-w-full">
+                            <div className="flex-1 bg-background-primary shadow-2xl shadow-black/20 rounded-2xl flex flex-col p-6 gap-6 h-fit sticky md:top-32 lg:top-40 min-w-0 max-w-full">
                                 <h2 className="font-bold text-4xl lg:text-5xl">Curious for more?</h2>
                                 <p className="text-base lg:text-lg">I can email you my full portfolio PDF. It includes the technical breakdowns and nitty-gritty details that I left out to save space here.</p>
                                 <PortfolioCTA source={`project-${project.slug}`} variant="compact" />
